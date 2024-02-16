@@ -8,42 +8,18 @@ async function initPhotographerPage() {
     }
 
     const { photographers } = await getPhotographers();
-    const { photographerDetails } = createPhotographerDetailsFactory(photographers, id);
-    photographerDetails(photographers)
-    /*  if (photographerDetails) {
-          photographerDetails.getPhotographerDetailsDOM();
+    const { displayDataById } = idPhotographerTemplate(photographers, id);
+    displayDataById(photographers)
+    /*  if (displayDataById) {
+          displayDataById.getdisplayDataByIdDOM();
       }
       */
-    if (photographerDetails) {
-        photographerDetails.displayDataDetail();
-    }
+    /*
+   if (displayDataById) {
+       displayDataById.displayDataDetail();
+   }*/
     console.log('HELLOOOOO:')
 }
 
 initPhotographerPage();
 
-
-
-
-
-// Appeler la fonction d'initialisation de la page du photographe
-
-
-
-//Mettre le code JavaScript lié à la page photographer.html
-
-
-// elle est dans le fichier qui est appelé dans le fichier photographer.html (page/photographer.js)
-
-/*
-async function init() {
-    // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
-    displayData(photographers);
-
-    console.log('Photographers Data:', photographers);
-}
-
-init();*/
-
-// photographer.js

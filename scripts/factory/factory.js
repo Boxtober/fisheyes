@@ -1,6 +1,8 @@
-function photographerTemplate() {
-    function getUserCardDOM(photographer) {
-        const { id, name, city, tagline, portrait, price } = photographer;
+function photographerTemplate(photographer) { // photographerFactory
+    const { id, name, city, tagline, country, portrait, price } = photographer;
+
+    function getUserCardDOM() {
+        // const { id, name, city, tagline, portrait, price } = photographer;
         const picture = `/assets/Photographers-ID-Photos/${portrait}`;
 
         const link = document.createElement('a');
@@ -34,21 +36,11 @@ function photographerTemplate() {
         return link;
     }
 
-    function displayData(photographers) {
-        const photographersSection = document.querySelector(".photographer_section");
 
-        photographers.forEach((photographer) => {
-            const userCardDOM = getUserCardDOM(photographer);
-            photographersSection.appendChild(userCardDOM);
-        });
-    }
-
-    return { getUserCardDOM, displayData };
-
-
+    return { id, name, city, tagline, country, portrait, price, getUserCardDOM }; // ajouter les fonctions reprises
 }
 
-function createPhotographerDetailsFactory(data, photographerId) {
+function idPhotographerTemplate(data, photographerId) {
     const photographer = data.find(item => item.id === parseInt(photographerId, 10));
 
     if (!photographer) {
@@ -57,12 +49,14 @@ function createPhotographerDetailsFactory(data, photographerId) {
     }
 
     const { id, name, city, country, portrait, price, tagline } = photographer;
+    //const { id, photographerId, title, image, likes, date, price} = media;
     const picture = `/assets/Photographers-ID-Photos/${portrait}`;
 
-    function getPhotographerDetailsDOM() {
-        const photographerDetailsSection = document.querySelector(".photographer-details-section");
+    function getIdUserCardDOM() {
+        const displayDataByIdSection = document.querySelector(".photograph-header");
 
         const article = document.createElement('article');
+
 
         const img = document.createElement('img');
         img.setAttribute("src", picture);
@@ -85,158 +79,54 @@ function createPhotographerDetailsFactory(data, photographerId) {
         article.appendChild(userTagline);
         article.appendChild(userPrice);
 
-        photographerDetailsSection.appendChild(article);
+        displayDataByIdSection.appendChild(article);
     }
 
-    function displayDataDetail(photographers) {
-        const photographersSection = document.querySelector(".photographer-details-section");
+    function displayDataById(photographers) {
+        const photographersSectionId = document.querySelector(".photographer-details-section");
 
-        photographers((photographerId) => {
-            const detailUserCardDOM = createPhotographerDetailsFactory(photographerId);
-            photographersSection.appendChild(detailUserCardDOM);
+        photographers.forEach((photographer) => {
+            const detailUserCardDOM = getIdUserCardDOM(photographer);
+            photographersSectionId.appendChild(detailUserCardDOM);
         });
 
-        console.log(photographerId)
-    }
+    } console.log('PHOTOGRAPHE DATA ----> ', photographer)
 
-    return { getPhotographerDetailsDOM, displayDataDetail, createPhotographerDetailsFactory };
-}
-
-
-/*
-async function displayData(photographers) {
-    const photographersSection = document.querySelector(".photographer_section");
-
-    photographers.forEach((photographer) => {
-        const photographerModel = photographerTemplate(photographer);
-        const userCardDOM = photographerModel.getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);
-    });
-}
-*/
-
-// a mettre  dans la factory sans oublier de la return
-/*
-async function displayData(photographers) {
-    const photographersSection = document.querySelector(".media-item");
-
-    if (!photographersSection) {
-        console.error('Photographers section not found in the document');
-        return;
-    }
-
-    photographers.forEach((photographer) => {
-        const userCardDOM = photographer.getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);
-    });
+    return { displayDataById, getIdUserCardDOM };
 }
 
 
 
-function photographerTemplate(data) {
-    const { id, name, city, tagline, portrait, price } = data;
-
-    const picture = `/assets/Photographers-ID-Photos/${portrait}`;
-
-    function getUserCardDOM() {
-        const link = document.createElement('a');
-        link.setAttribute('href', `photographer.html?id=${id}`);
-        link.setAttribute('id', `user-${id}`);
-
-        const article = document.createElement('article');
-
-        const img = document.createElement('img');
-        img.setAttribute("src", picture)
-
-        const h2 = document.createElement('h2');
-        h2.textContent = name;
-
-        const userCity = document.createElement('h3');
-        userCity.textContent = city;
-
-        const userTagline = document.createElement('p');
-        userTagline.textContent = tagline;
-
-        const userPrice = document.createElement('span');
-        userPrice.textContent = price + `€/jour`;
-
-        article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(userCity);
-        article.appendChild(userTagline);
-        article.appendChild(userPrice);
-
-        link.appendChild(article);
-        return link;
-    }
-
-    return { name, city, picture, tagline, price, getUserCardDOM }
-}
-*/
-
-/*
-function Media(data) {
-    const { id, photographerId, title, image, video, likes, date, price } = data;
-
-    function getMedia() {
-        const mediaContainer = document.createElement('div');
-        mediaContainer.classList.add('media-item');
-
-        if (image) {
-            const img = document.createElement('img');
-            img.setAttribute("src", `/assets/${image}`);
-            img.setAttribute("alt", title);
-            mediaContainer.appendChild(img);
-        } else if (video) {
-            const videoElement = document.createElement('video');
-            videoElement.setAttribute("src", `/assets/${video}`);
-            videoElement.setAttribute("controls", true);
-            mediaContainer.appendChild(videoElement);
+function mediaFactory(mediaData) {
+    function createMedia(media) {
+        if (media.image) {
+            return createImage(media);
+        } else if (media.video) {
+            return createVideo(media);
+        } else {
+            console.error('Unknown media type:', media);
+            return null;
         }
-
-        return mediaContainer;
     }
 
-    return { id, photographerId, title, image, video, likes, date, price, getMedia };
-}
-*/
-
-
-/*
-function Photographer(data) {
-    const { id, name, city, tagline, portrait, price } = data;
-
-    function getUserCardDOM() {
-        const link = document.createElement('a');
-        link.setAttribute('href', `photographer.html?id=${id}`);
-        link.setAttribute('id', `user-${id}`);
-
-        const article = document.createElement('article');
-
+    function createImage(imageData) {
         const img = document.createElement('img');
-        img.setAttribute("src", `/assets/Photographers-ID-Photos/${portrait}`);
-
-        const h2 = document.createElement('h2');
-        h2.textContent = name;
-
-        const userCity = document.createElement('h3');
-        userCity.textContent = city;
-
-        const userTagline = document.createElement('p');
-        userTagline.textContent = tagline;
-
-        const userPrice = document.createElement('span');
-        userPrice.textContent = price + `€/jour`;
-
-        article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(userCity);
-        article.appendChild(userTagline);
-        article.appendChild(userPrice);
-
-        link.appendChild(article);
-        return link;
+        img.setAttribute('src', `/assets/${imageData.image}`);
+        img.setAttribute('alt', imageData.title);
+        return img;
     }
 
-    return { id, name, city, tagline, portrait, price, getUserCardDOM };
-}*/
+    function createVideo(videoData) {
+        const video = document.createElement('video');
+        video.setAttribute('src', `/assets/${videoData.video}`);
+        video.setAttribute('controls', true);
+        video.setAttribute('alt', videoData.title);
+        return video;
+    }
+
+    const media = mediaFactory().createMedia(photographer);
+    article.appendChild(media);
+    console.log('MEDIA -----> ', media)
+
+    //return { createMedia };
+}
