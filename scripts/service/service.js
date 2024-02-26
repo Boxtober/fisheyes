@@ -27,3 +27,19 @@ async function getPhotographers() {
         };
     }
 }
+
+async function getMediasByPhotographerId() {
+
+    const media = mediaFactory().createMedia(photographer);
+    article.appendChild(media);
+
+    const { medias } = await getMediasByPhotographerId($id);
+
+    medias.forEach((media) => {
+        const mediasSection = document.querySelector(".medias_section");
+        const mediaFactories = mediaFactory(media);
+        const mediaCard = mediaFactories.getMediaCardDOM();
+
+        mediasSection.appendChild(mediaCard);
+    });
+}
