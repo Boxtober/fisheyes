@@ -6,7 +6,7 @@ async function getPhotographers() {
         }
 
         const data = await response.json();
-        console.log('Data from JSON:', data);
+        console.log('ALL Data from JSONNNNNNNN:', data);
 
         if (!data || !data.photographers) {
             console.error('Invalid data from JSON:', data);
@@ -28,18 +28,31 @@ async function getPhotographers() {
     }
 }
 
-async function getMediasByPhotographerId() {
+async function getMediasByPhotographerId(photographerId) {
+    try {
+        const response = await fetch('/data/photographers.json');
+        if (!response.ok) {
+            throw new Error('Erreur lors de la récupération des données des médias');
+        }
 
-    const media = mediaFactory().createMedia(photographer);
-    article.appendChild(media);
+        const data = await response.json();
+        console.log('All Data from JSON:', data);
 
-    const { medias } = await getMediasByPhotographerId($id);
+        if (!data || !data.media) {
+            console.error('Invalid data from JSON:', data);
+            return {
+                medias: []
+            };
+        }
 
-    medias.forEach((media) => {
-        const mediasSection = document.querySelector(".medias_section");
-        const mediaFactories = mediaFactory(media);
-        const mediaCard = mediaFactories.getMediaCardDOM();
-
-        mediasSection.appendChild(mediaCard);
-    });
+        const medias = data.media.filter(media => media.photographerId === photographerId);
+        return {
+            medias
+        };
+    } catch (error) {
+        console.error(error);
+        return {
+            medias: []
+        };
+    }
 }

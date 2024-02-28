@@ -1,22 +1,36 @@
-
 function mediaFactory(media) {
-    const { id, photographerId, title, image, likes, date, price } = media;
+    const { id, photographerId, title, image, video } = media;
 
     function getMediaCardDOM() {
-        if (media.image) {
-            return createImage(media);
-        } else if (media.video) {
-            return createVideo(media);
-        } else {
-            console.error('Unknown media type:', media);
-            return null;
+        const article = document.createElement('article');
+        const h2 = document.createElement('h2');
+
+        //const image = document.createElement('img');
+        //    image.setAttribute("src", image);
+
+        h2.textContent = title;
+
+        article.appendChild(h2);
+        // article.appendChild(image)
+
+
+        if (image) {
+            const img = createImage(media);
+            article.appendChild(img);
         }
+        if (video) {
+            const vid = createVideo(media);
+            article.appendChild(vid);
+        }
+
+        return article;
     }
 
-    function createImage(imageData) {
+    function createImage(media) {
         const img = document.createElement('img');
-        img.setAttribute('src', `/assets/${imageData.image}`);
-        img.setAttribute('alt', imageData.title);
+        img.setAttribute('src', `/assets/${media.photographerId}/${media.image}`);
+        img.setAttribute('alt', media.title);
+
         return img;
     }
 
@@ -29,6 +43,5 @@ function mediaFactory(media) {
     }
 
 
-    console.log('MEDIA -----> ', media)
-    return { img, video, getMediaCardDOM, photographerId };
+    return { getMediaCardDOM, createImage, createVideo };
 }
