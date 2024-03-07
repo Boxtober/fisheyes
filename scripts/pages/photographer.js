@@ -21,6 +21,10 @@ async function initPhotographerPage() {
     // const mediaFactories = mediaFactory(medias);
 
     // boucle
+
+    //remplacer par un gestionnaire de media
+
+    // function mediaFactoryS(mediaS) { <-- recois les medias dans un tableau + fonction de fltre
     medias.forEach((media) => {
         // Passer les données des médias à mediaFactory
         const mediaFactories = mediaFactory(media);

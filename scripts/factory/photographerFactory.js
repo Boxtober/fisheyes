@@ -48,7 +48,7 @@ function photographerFactory(photographer) { // photographerFactory
         const displayDataByIdSection = document.querySelector(".photograph-header");
 
         const article = document.createElement('article');
-
+        const div = document.createElement('div');
 
         const img = document.createElement('img');
         img.setAttribute("src", picture);
@@ -62,21 +62,17 @@ function photographerFactory(photographer) { // photographerFactory
         const userTagline = document.createElement('p');
         userTagline.textContent = tagline;
 
-        const userPrice = document.createElement('span');
-        userPrice.textContent = price + `€/jour`;
 
-        article.appendChild(img);
+        div.appendChild(img);
         article.appendChild(h2);
         article.appendChild(userCityCountry);
         article.appendChild(userTagline);
-        article.appendChild(userPrice);
 
         displayDataByIdSection.appendChild(article);
-
+        displayDataByIdSection.appendChild(div);
         return displayDataByIdSection;
 
     }
-
 
     return { id, name, city, tagline, country, portrait, price, getUserCardDOM, getIdUserCardDOM };
 }

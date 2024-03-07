@@ -14,15 +14,16 @@
   <header>
     <img src="assets/images/logo.png" class="logo" />
   </header>
-  <main id="main">
 
-    <div class="photographer-details-section"></div>
+  <!----  <main id="main"></main> ---->
 
-    <div class="photograph-header">
+  <div class="photograph-header">
 
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-    </div>
-  </main>
+    <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+
+  </div>
+
+  <div class="photographer-details-section"></div>
 
   <article class="medias_section"></article>
 
@@ -32,12 +33,26 @@
         <h2>Contactez-moi</h2>
         <img src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-      <form>
+      <form method="post">
         <div>
           <label>Prénom</label>
-          <input />
+          <!---- <input />-->
+          <input class="text-control" type="text" id="firstName" name="firstName" minlength="2" /><br>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <div>
+          <label for="userName">Nom</label><br>
+          <input class="text-control" type="text" id="name" name="name" minlength="2" /><br>
+        </div>
+        <div>
+          <label for="email">E-mail</label><br>
+          <input class="text-control" type="email" id="email" name="email" /><br>
+        </div>
+        <div>
+          <label for="message">Votre message</label><br>
+          <input class="text-control" type="text" id="message" name="message" /><br>
+        </div>
+
+        <button id="submit" type="submit" class="contact_button">Envoyer</button>
       </form>
     </div>
   </div>
@@ -47,7 +62,7 @@
   <script src="scripts/factory/mediaFactory.js"></script>
   <script src="scripts/service/service.js"></script>
   <script src="scripts/pages/photographer.js"></script>
-
+  <script src="scripts/utils/contactForm.js"></script>
 </body>
 
 </html>
