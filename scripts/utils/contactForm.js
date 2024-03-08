@@ -20,7 +20,6 @@ function closeModal() {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-
     const firstName = document.getElementById("firstName").value;
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -29,13 +28,18 @@ form.addEventListener("submit", (e) => {
     let firstNameValid = checkFirstname();
     let nameValid = checkUserName();
     let emailValid = checkEmail();
+    let messageValid = checkMessage();
 
-    if (firstNameValid && nameValid && emailValid) {
+    if (firstNameValid && nameValid && emailValid && messageValid) {
         closeModal();
         console.log("Prenom : ", firstName);
         console.log("Nom : ", name);
         console.log("Email : ", email);
+        console.log("Message : ", message);
+        form.reset();
     }
+
+
 });
 
 function createErrorMessage(parentElement, errorMessageSelector) {
@@ -120,6 +124,25 @@ function checkEmail() {
     } else if (!emailRegex.test(emailValue)) {
         parentElement.setAttribute('data-error-visible', 'true');
         errorMessageElement.textContent = 'Adresse mail invalide';
+        return false;
+    } else {
+        parentElement.setAttribute('data-error-visible', 'false');
+        errorMessageElement.textContent = '';
+        return true;
+    }
+}
+
+
+function checkMessage() {
+    const messageInput = document.getElementById("message");
+    const messageValue = messageInput.value.trim();
+    let parentElement = messageInput.parentNode;
+
+    const errorMessageElement = createErrorMessage(parentElement, '.error-message');
+
+    if (messageValue.length === 0) {
+        parentElement.setAttribute('data-error-visible', 'true');
+        errorMessageElement.textContent = 'Le champ ne doit pas être vide';
         return false;
     } else {
         parentElement.setAttribute('data-error-visible', 'false');

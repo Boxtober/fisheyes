@@ -27,10 +27,30 @@
 
   <h3>Filtres</h3>
   <br>
-  <button class="filterByLikes">Popularité</button>
+  <div class="dropdown" aria-haspopup="listbox" aria-expanded="false">
+    <button class="dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded="false"
+      aria-controls="dropdown-options" id="dropdown-trigger">
+      Sélectionnez une option
+    </button>
+    <ul class="dropdown-options" role="listbox" aria-labelledby="dropdown-trigger" id="dropdown-options">
+
+      <li role="option" aria-selected="false" class="filterByLikes">Par Likes</li>
+      <li role="option" aria-selected="false" class="filterByDate">Par Date</li>
+      <li role="option" aria-selected="false" class="filterByTitle">Par Titre</li>
+
+    </ul>
+  </div>
+  <!-------
+  <ul role="button" aria-expanded="true" aria-haspopup="listbox">
+    <li role="listbox" aria-activedescendant="true" aria-selected="true" aria-labelledby="">
+      Popularité></li>
+
+  </ul>
+
+  <button> </button>
   <button class="filterByDate">Date</button>
   <button class="filterByTitle">Titre</button>
-
+----->
   <article class="medias_section"></article>
 
   <div id="contact_modal">

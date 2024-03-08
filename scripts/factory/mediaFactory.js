@@ -39,7 +39,7 @@ function mediaFactory(media) {
         //video.setAttribute('src', `/assets/${videoData.video}`);
 
         video.setAttribute('src', `assets/${videoData.photographerId}/${videoData.video}`);
-        video.setAttribute('controls', true);
+        // video.setAttribute('controls', false);
         video.setAttribute('alt', videoData.title);
         return video;
     }

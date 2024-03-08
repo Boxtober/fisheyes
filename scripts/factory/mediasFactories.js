@@ -4,73 +4,57 @@ function mediasFactories(medias) {
 
     function displayMedias() {
 
-        //appel function display filter
+        filterByLikes()
+        filterByDate()
+        filterByTitle()
+
+        const mediasSection = document.querySelector(".medias_section");
+
+        mediasSection.innerHTML = '';
 
         mediasFiltered.forEach((media) => {
 
             const mediaFactories = mediaFactory(media);
-
-            const mediasSection = document.querySelector(".medias_section");
             const mediaCard = mediaFactories.getMediaCardDOM(media);
-
-            //supprimer avant de filter (mediasection.remove...)
             mediasSection.appendChild(mediaCard);
+
         });
 
     }
 
-    //cree function filter
+    function filterByLikes() {
+        const likes = document.querySelector(".filterByLikes")
+        likes.addEventListener("click", function () {
 
-    console.log('Medias:', medias);
-    return { medias, displayMedias };
+            mediasFiltered.sort((a, b) => b.likes - a.likes);
+            displayMedias();
+            console.log('FILTRE BY LIKES:', mediasFiltered);
+        })
+    }
+
+    function filterByDate() {
+        const dates = document.querySelector(".filterByDate")
+        dates.addEventListener("click", function () {
+
+            mediasFiltered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            displayMedias();
+
+            console.log('FILTRE BY Date:', mediasFiltered);
+        })
+    }
+
+    function filterByTitle() {
+        const title = document.querySelector(".filterByTitle")
+        title.addEventListener("click", function () {
+            mediasFiltered.sort((a, b) => a.title.localeCompare(b.title));
+            displayMedias();
+            console.log('FILTRE BY TITLE:', mediasFiltered);
+        })
+
+    }
+
+
+    // displayMedias();
+
+    return { medias, displayMedias, filterByLikes, filterByDate, filterByTitle };
 }
-
-/*
-const filterByLikes = document.querySelector(".filterByLikes")
-
-filterByLikes.addEventListener("click", function () {
-    const mediaCopy = [...medias];
-    mediaCopy.sort((a, b) => b.likes - a.likes);
-
-    console.log('FILTRE BY LIKES:', mediaCopy);
-
-
-    mediaCopy.forEach((media) => {
-
-        const mediaFactories = mediaFactory(media);
-
-        const mediasSection = document.querySelector(".medias_section");
-        const mediaCard = mediaFactories.getMediaCardDOM(media);
-        mediasSection.appendChild(mediaCard);
-    });
-
-});
-*/
-
-/*
-
-async function mediasFactories(medias) {
-    const medias = media;
-
-    const { medias } = await getMediasByPhotographerId(photographer.id);
-    // const mediaFactories = mediaFactory(medias);
-
-    // boucle
-
-    //remplacer par un gestionnaire de media
-
-    // function mediaFactoryS(mediaS) { <-- recois les medias dans un tableau + fonction de fltre
-    medias.forEach((media) => {
-        // Passer les données des médias à mediaFactory
-        const mediaFactories = mediaFactory(media);
-        const mediasSection = document.querySelector(".medias_section");
-        const mediaCard = mediaFactories.getMediaCardDOM(media);
-        mediasSection.appendChild(mediaCard);
-    });
-
-    console.log('Medias:', medias);
-
-}
-
-
-*/
