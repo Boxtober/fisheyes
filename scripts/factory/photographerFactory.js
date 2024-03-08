@@ -70,6 +70,15 @@ function photographerFactory(photographer) { // photographerFactory
 
         displayDataByIdSection.appendChild(article);
         displayDataByIdSection.appendChild(div);
+
+
+        const contactButton = document.querySelector(".contact_button");
+        if (contactButton) {
+
+            displayDataByIdSection.insertBefore(contactButton, div);
+        }
+
+
         return displayDataByIdSection;
 
     }

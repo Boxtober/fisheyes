@@ -28,13 +28,11 @@ form.addEventListener("submit", (e) => {
 
     let firstNameValid = checkFirstname();
     let nameValid = checkUserName();
-    let emailValid = checkEmail();
 
-    if (firstNameValid && nameValid && emailValid) {
+    if (firstNameValid && nameValid) {
         closeModal();
-        console.log("Prenom : ", firstName);
+        console.log("prenom : ", firstName);
         console.log("Nom : ", name);
-        console.log("Email : ", email);
     }
 });
 
@@ -59,17 +57,21 @@ function checkFirstname() {
 
     if (firstNameValue.length === 0) {
         parentElement.setAttribute('data-error-visible', 'true');
+        parentElement.setAttribute('data-error', 'Le champ ne doit pas être vide');
         errorMessageElement.textContent = 'Le champ ne doit pas être vide';
         return false;
     } else if (firstNameValue.length < 2) {
         parentElement.setAttribute('data-error-visible', 'true');
+        parentElement.setAttribute('data-error', 'Veuillez entrer au minimum 2 caractères');
         errorMessageElement.textContent = 'Veuillez entrer au minimum 2 caractères';
         return false;
     } else if (!validCharacters.test(firstNameValue)) {
         parentElement.setAttribute('data-error-visible', 'true');
+        parentElement.setAttribute('data-error', 'Aucun chiffre autorisé');
         errorMessageElement.textContent = 'Aucun chiffre autorisé';
         return false;
     } else {
+
         parentElement.setAttribute('data-error-visible', 'false');
         errorMessageElement.textContent = '';
         return true;
@@ -87,43 +89,23 @@ function checkUserName() {
 
     if (userNameValue.length === 0) {
         parentElement.setAttribute('data-error-visible', 'true');
+        parentElement.setAttribute('data-error', 'Le champ ne doit pas être vide');
         errorMessageElement.textContent = 'Le champ ne doit pas être vide';
         return false;
     } else if (userNameValue.length < 2) {
         parentElement.setAttribute('data-error-visible', 'true');
+        parentElement.setAttribute('data-error', 'Veuillez entrer au minimum 2 caractères');
         errorMessageElement.textContent = 'Veuillez entrer au minimum 2 caractères';
         return false;
     } else if (!validCharacters.test(userNameValue)) {
         parentElement.setAttribute('data-error-visible', 'true');
+        parentElement.setAttribute('data-error', 'Aucun chiffre autorisé');
         errorMessageElement.textContent = 'Aucun chiffre autorisé';
         return false;
     } else {
+
         parentElement.setAttribute('data-error-visible', 'false');
-        errorMessageElement.textContent = '';
-        return true;
-    }
-}
-
-function checkEmail() {
-    const emailInput = document.getElementById("email");
-    const emailValue = emailInput.value.trim();
-    let parentElement = emailInput.parentNode;
-
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    const errorMessageElement = createErrorMessage(parentElement, '.error-message');
-
-    if (emailValue.length === 0) {
-        parentElement.setAttribute('data-error-visible', 'true');
-        errorMessageElement.textContent = 'Le champ ne doit pas être vide';
-        return false;
-    } else if (!emailRegex.test(emailValue)) {
-        parentElement.setAttribute('data-error-visible', 'true');
-        errorMessageElement.textContent = 'Adresse mail invalide';
-        return false;
-    } else {
-        parentElement.setAttribute('data-error-visible', 'false');
-        errorMessageElement.textContent = '';
+        errorMessageElement.textContent = ''; // Efface le message d'erreur s'il n'y a pas d'erreur
         return true;
     }
 }

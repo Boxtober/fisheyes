@@ -16,25 +16,38 @@ async function initPhotographerPage() {
 
     photographersSectionId.appendChild(detailUserCardDOM);
 
-    const { medias } = await getMediasByPhotographerId(photographer.id); // Récupérer les médias pour ce photographe
 
-    // const mediaFactories = mediaFactory(medias);
+    const { medias } = await getMediasByPhotographerId(photographer.id);
 
-    // boucle
+    const mediasFacto = mediasFactories(medias);
+    mediasFacto.displayMedias()
 
-    //remplacer par un gestionnaire de media
 
-    // function mediaFactoryS(mediaS) { <-- recois les medias dans un tableau + fonction de fltre
-    medias.forEach((media) => {
-        // Passer les données des médias à mediaFactory
-        const mediaFactories = mediaFactory(media);
 
-        const mediasSection = document.querySelector(".medias_section");
-        const mediaCard = mediaFactories.getMediaCardDOM(media);
-        mediasSection.appendChild(mediaCard);
-    });
-
-    console.log('HELLOOOOO:', medias);
+    /*
+        const filterByLikes = document.querySelector(".filterByLikes")
+    
+        filterByLikes.addEventListener("click", function () {
+            const mediaCopy = [...medias];
+            mediaCopy.sort((a, b) => b.likes - a.likes);
+    
+            console.log('FILTRE BY LIKES:', mediaCopy);
+    
+    
+            mediaCopy.forEach((media) => {
+    
+                const mediaFactories = mediaFactory(media);
+    
+                const mediasSection = document.querySelector(".medias_section");
+                const mediaCard = mediaFactories.getMediaCardDOM(media);
+                mediasSection.appendChild(mediaCard);
+            });
+    
+        });
+    
+    
+        console.log('Medias:', medias);
+    */
 }
 
 initPhotographerPage();
