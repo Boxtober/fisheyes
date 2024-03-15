@@ -23,6 +23,7 @@
 
   </div>
 
+
   <div class="photographer-details-section"></div>
 
   <h3>Filtres</h3>
@@ -51,7 +52,22 @@
   <button class="filterByDate">Date</button>
   <button class="filterByTitle">Titre</button>
 ----->
+
+  <div id="lightBox-modal">
+    <div class="lightbox" aria-hidden="true" role="dialog" aria-describedby="lightboxTitle">
+
+      <div>
+        <img class="close-lightbox" src="assets/icons/close.svg" />
+        <button class="previous-btn"> previous</button>
+        <button class="next-btn">next</button>
+
+      </div>
+
+    </div>
+  </div>
   <article class="medias_section"></article>
+
+
 
   <div id="contact_modal">
     <div class="modal">
@@ -84,6 +100,10 @@
   </div>
 
 
+
+
+
+  <script src="scripts/utils/lightBox.js"></script>
   <script src="scripts/factory/photographerFactory.js"></script>
   <script src="scripts/factory/mediaFactory.js"></script>
   <script src="scripts/factory/mediasFactories.js"></script>

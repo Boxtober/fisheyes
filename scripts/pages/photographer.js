@@ -16,38 +16,11 @@ async function initPhotographerPage() {
 
     photographersSectionId.appendChild(detailUserCardDOM);
 
-
     const { medias } = await getMediasByPhotographerId(photographer.id);
 
     const mediasFacto = mediasFactories(medias);
     mediasFacto.displayMedias()
 
-
-
-    /*
-        const filterByLikes = document.querySelector(".filterByLikes")
-    
-        filterByLikes.addEventListener("click", function () {
-            const mediaCopy = [...medias];
-            mediaCopy.sort((a, b) => b.likes - a.likes);
-    
-            console.log('FILTRE BY LIKES:', mediaCopy);
-    
-    
-            mediaCopy.forEach((media) => {
-    
-                const mediaFactories = mediaFactory(media);
-    
-                const mediasSection = document.querySelector(".medias_section");
-                const mediaCard = mediaFactories.getMediaCardDOM(media);
-                mediasSection.appendChild(mediaCard);
-            });
-    
-        });
-    
-    
-        console.log('Medias:', medias);
-    */
 }
 
 initPhotographerPage();

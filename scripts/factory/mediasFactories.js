@@ -14,8 +14,11 @@ function mediasFactories(medias) {
 
         mediasFiltered.forEach((media) => {
 
-            const mediaFactories = mediaFactory(media);
-            const mediaCard = mediaFactories.getMediaCardDOM(media);
+            const mediaFactories = mediaFactory(mediasFiltered);
+            //donner tout les medias
+
+
+            const mediaCard = mediaFactories.getMediaCardDOM(media); // 
             mediasSection.appendChild(mediaCard);
 
         });
