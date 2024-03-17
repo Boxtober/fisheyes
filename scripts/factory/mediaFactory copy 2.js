@@ -26,7 +26,6 @@ function mediaFactory(mediasFiltered) {
     }
 
     function createImage(media) {
-
         const img = document.createElement('img');
         img.setAttribute('src', `assets/${media.photographerId}/${media.image}`);
         img.setAttribute('alt', media.title);
@@ -38,30 +37,30 @@ function mediaFactory(mediasFiltered) {
         const indexPrev = (index - 1) < 0 ? medias.length - 1 : index - 1;
         const indexNext = (index + 1) >= medias.length ? 0 : index + 1;
 
+        console.log(indexPrev)
+        console.log(index)
+        console.log(indexNext)
+
+        console.log(medias[index - 1]) // 
+
+
         img.addEventListener('click', function () {
             displaylightBox(media, medias[indexPrev].id, medias[indexNext].id);
         });
 
+
+        console.log(media)
+        console.log(medias)
+
         return img;
     }
 
+    const lightBoxOverlay = document.createElement("div");
+    lightBoxOverlay.classList.add("lightBox-overlay");
+    const lightBox = document.querySelector('.lightbox');
+    const close = document.querySelector('.close-lightbox');
+
     function displaylightBox(media, idPrev, idNext) {
-
-        const lightBoxOverlay = document.createElement("div");
-        lightBoxOverlay.classList.add("lightBox-overlay");
-
-        const prev = document.createElement("button");
-        prev.classList.add("prev-btn");
-        prev.textContent = "Previous";
-
-        const next = document.createElement("button");
-        next.classList.add("next-btn");
-        next.textContent = "Next";
-
-        const closeButton = document.createElement("button");
-        closeButton.classList.add("close-btn");
-        closeButton.textContent = "Close";
-
         const lightBoxImage = document.createElement('img');
         lightBoxImage.setAttribute('src', `assets/${media.photographerId}/${media.image}`);
         lightBoxImage.setAttribute('alt', media.title);
@@ -70,29 +69,18 @@ function mediaFactory(mediasFiltered) {
         lightBox.innerHTML = '';
         lightBox.style.display = "block";
         lightBox.appendChild(lightBoxImage);
-        lightBox.appendChild(prev);
-        lightBox.appendChild(next);
-        lightBox.appendChild(closeButton);
-
-        prev.addEventListener('click', function () {
-            const index = medias.findIndex(element => element.id === idPrev);
-            const prevMedia = medias[index];
-            const prevPrevIndex = (index - 1) < 0 ? medias.length - 1 : index - 1;
-            const prevNextIndex = (index + 1) >= medias.length ? 0 : index + 1;
-            displaylightBox(prevMedia, medias[prevPrevIndex].id, medias[prevNextIndex].id);
-        });
-
-        next.addEventListener('click', function () {
-            const index = medias.findIndex(element => element.id === idNext);
-            const nextMedia = medias[index];
-            const nextPrevIndex = (index - 1) < 0 ? medias.length - 1 : index - 1;
-            const nextNextIndex = (index + 1) >= medias.length ? 0 : index + 1;
-            displaylightBox(nextMedia, medias[nextPrevIndex].id, medias[nextNextIndex].id);
-        });
-
-        closeButton.addEventListener('click', function () {
-            lightBox.style.display = "none";
-        });
+        /* 
+               lightBox.style.display = "block";
+               lightBoxOverlay.appendChild(lightBox);
+               document.body.appendChild(lightBoxOverlay);
+       */
+        /*
+          console.log('ici', media)
+          console.log('apres', idPrev)
+          console.log('avant', idNext)
+  */    console.log('ici', media)
+        console.log('apres', idPrev)
+        console.log('avant', idNext)
     }
 
     function createVideo(videoData) {
