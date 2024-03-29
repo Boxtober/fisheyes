@@ -33,6 +33,77 @@
 
 
   <div class="dropdown" aria-haspopup="listbox" aria-expanded="false">
+    <label for="dropdown-trigger">Trier par</label>
+
+    <ul role="listbox" aria-haspopup="listbox" aria-controls="dropdown-options">
+      <img src="assets/icons/arrow-filter.svg" id="dropdown-options">
+      <li role="option" aria-selected="true" class="filterByLikes" aria-expanded="false">
+        Popularité
+
+      </li>
+
+
+      <li role="option" aria-selected="false" class="filterByDate dropdown-content" aria-expanded="false">Date
+      </li>
+
+      <li role="option" aria-selected="false" class="filterByTitle dropdown-content" aria-expanded="false">Titre
+
+      </li>
+
+    </ul>
+  </div>
+
+  <!-------------
+  <div class="dropdown">
+    <ul>
+      <li class="dropbtn" id="dropdownButton" role="option" aria-selected="true" aria-expanded="false">Popularité
+        <img src="assets/icons/arrow-filter.svg" class="actif">
+      </li>
+
+
+      <div id="myDropdown" class="dropdown-content">
+
+        <li role="option" aria-selected="false" class="filterByDate" aria-expanded="false">Date
+          <img src="assets/icons/arrow-filter.svg" class="actif">
+        </li>
+        <li role="option" aria-selected="false" class="filterByTitle" aria-expanded="false">Titre
+          <img src="assets/icons/arrow-filter.svg" class="actif">
+        </li>
+      </div>
+    </ul>
+  </div>
+
+  <div class="dropdown">
+    <ul>
+      <li class="dropbtn" id="dropdownButton">About</li>
+      <div id="myDropdown" class="dropdown-content">
+        <li href="#about">About</li>
+        <li href="#base">Base</li>
+      </div>
+    </ul>
+  </div>
+
+
+  <div class="dropdown">
+    <ul>
+      <li onclick="myFunction()" class="dropbtn" role="option" aria-selected="true" aria-expanded="false">Popularité
+      <img src="assets/icons/arrow-filter.svg" class="actif">
+      </li>
+
+
+      <div id="myDropdown" class="dropdown-content"></div>
+
+      <li role="option" aria-selected="false" class="filterByDate" aria-expanded="false">Date
+        <img src="assets/icons/arrow-filter.svg" class="actif">
+      </li>
+      <li role="option" aria-selected="false" class="filterByTitle" aria-expanded="false">Titre
+        <img src="assets/icons/arrow-filter.svg" class="actif">
+      </li>
+  </div>
+  </ul>
+  </div>
+
+  <div class="dropdown" aria-haspopup="listbox" aria-expanded="false">
     <label>
       Trier par
     </label>
@@ -54,7 +125,6 @@
     </ul>
   </div>
 
-  <!-------------
   
   <ul role="button" aria-expanded="true" aria-haspopup="listbox">
     <li role="listbox" aria-activedescendant="true" aria-selected="true" aria-labelledby="">

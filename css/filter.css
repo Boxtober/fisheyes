@@ -1,78 +1,104 @@
-.filterByDate,
-.filterByTitle {
+/*.dropdown-content {
+
     display: none;
+    position: absolute;
+    background-color: #ff0606;
+    width: 200px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    overflow-x: hidden;
+}
+*/
+
+ul {
+    width: 200px;
 }
 
-.dropdown {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-}
 
-label {
-    color: #000;
-    font-size: 18px;
-    font-weight: 700;
+
+.dropdown-content {
+    display: none;
+    background-color: #901C1C;
+    width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
 }
 
 li {
     background-color: #901C1C;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid white;
-    list-style: none;
     color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    list-style: none;
+}
+
+.active {
+    display: block;
+
 }
 
 /*
-
-
-
-.dropdown-trigger {
-    font-size: 18px;
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-    padding: 11px;
-    width: auto;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.dropdown-options {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-   
+.dropbtn {
     background-color: #901C1C;
     color: white;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-
-.dropdown-options li {
-    padding: 8px 12px;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
     cursor: pointer;
-    border-bottom: 1px solid white;
+    list-style: none;
 }
 
+.dropbtn:hover,
+.dropbtn:focus {
+    filter: brightness(1.5);
+    color: white;
+}
 
+#myInput {
+    box-sizing: border-box;
 
-.dropdown[aria-expanded="true"] .dropdown-options {
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {
+    outline: 3px solid #ddd;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropdown-content li {
+    background-color: #901C1C;
+
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
     display: block;
 }
 
-li {
-    display: flex;
-    flex-direction: row;
+.show {
+    display: block;
 }
-
-.actif {
-    display: none;
-}
-
 */
