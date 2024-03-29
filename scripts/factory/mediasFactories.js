@@ -17,8 +17,7 @@ function mediasFactories(medias) {
             const mediaFactories = mediaFactory(mediasFiltered);
             //donner tout les medias
 
-
-            const mediaCard = mediaFactories.getMediaCardDOM(media); // 
+            const mediaCard = mediaFactories.getMediaCardDOM(media);
             mediasSection.appendChild(mediaCard);
 
         });
@@ -53,10 +52,35 @@ function mediasFactories(medias) {
             displayMedias();
             console.log('FILTRE BY TITLE:', mediasFiltered);
         })
+    }
+    const dropdownTrigger = document.getElementById('dropdown-trigger');
 
+
+    dropdownTrigger.addEventListener('click', function () {
+
+        const filterByDate = document.querySelector('.filterByDate');
+        const filterByTitle = document.querySelector('.filterByTitle');
+
+        filterByDate.style.display = 'block';
+        filterByTitle.style.display = 'block';
+
+    });
+
+
+
+
+    /*
+    const dropdownTrigger = document.getElementById('dropdown-trigger');
+    const dropdownOptions = document.getElementById('dropdown-options');
+
+    function toggleDropdown() {
+        const expanded = dropdownOptions.getAttribute('aria-expanded') === 'true' || false;
+        dropdownOptions.setAttribute('aria-expanded', !expanded);
+        dropdownOptions.style.display = expanded ? 'none' : 'block';
     }
 
-
+    dropdownTrigger.addEventListener('click', toggleDropdown);
+*/
     // displayMedias();
 
     return { medias, displayMedias, filterByLikes, filterByDate, filterByTitle };

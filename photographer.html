@@ -4,6 +4,8 @@
 
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/lightbox.css" rel="stylesheet" type="text/css" />
+  <link href="css/filter.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -28,20 +30,32 @@
 
   <h3>Filtres</h3>
   <br>
-  <div class="dropdown" aria-haspopup="listbox" aria-expanded="false">
-    <button class="dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded="false"
-      aria-controls="dropdown-options" id="dropdown-trigger">
-      Sélectionnez une option
-    </button>
-    <ul class="dropdown-options" role="listbox" aria-labelledby="dropdown-trigger" id="dropdown-options">
 
-      <li role="option" aria-selected="false" class="filterByLikes">Par Likes</li>
-      <li role="option" aria-selected="false" class="filterByDate">Par Date</li>
-      <li role="option" aria-selected="false" class="filterByTitle">Par Titre</li>
+
+  <div class="dropdown" aria-haspopup="listbox" aria-expanded="false">
+    <label>
+      Trier par
+    </label>
+    <ul class="dropdown-trigger" class="dropdown-options" role="button" aria-haspopup="listbox"
+      aria-controls="dropdown-options" id="dropdown-trigger">
+
+      <li role="option" aria-selected="true" class="filterByLikes" aria-expanded="false">Popularité
+        <img src="assets/icons/arrow-filter.svg" class="actif">
+      </li>
+
+      <li role="option" aria-selected="false" class="filterByDate" aria-expanded="false">Date
+        <img src="assets/icons/arrow-filter.svg" class="actif">
+      </li>
+
+      <li role="option" aria-selected="false" class="filterByTitle" aria-expanded="false">Titre
+        <img src="assets/icons/arrow-filter.svg" class="actif">
+      </li>
 
     </ul>
   </div>
-  <!-------
+
+  <!-------------
+  
   <ul role="button" aria-expanded="true" aria-haspopup="listbox">
     <li role="listbox" aria-activedescendant="true" aria-selected="true" aria-labelledby="">
       Popularité></li>
@@ -53,17 +67,8 @@
   <button class="filterByTitle">Titre</button>
 ----->
 
-  <div id="lightBox-modal">
-    <div class="lightbox" aria-hidden="true" role="dialog" aria-describedby="lightboxTitle">
-      <!-------
-      <div>
-        <img class="close-lightbox" src="assets/icons/close.svg" />
-        <button class="previous-btn"> previous</button>
-        <button class="next-btn">next</button>
-
-      </div>
------>
-    </div>
+  <div id="lightBox-modal" aria-hidden="true" role="dialog" aria-describedby="lightboxTitle">
+    <div class="lightBox-content"></div>
   </div>
   <article class="medias_section"></article>
 

@@ -72,16 +72,6 @@ span {
     font-weight: 400;
 }
 
-article>img,
-video {
-    height: 300px;
-    width: 350px;
-    object-fit: cover;
-    border-radius: 5px;
-    object-fit: cover;
-}
-
-
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
