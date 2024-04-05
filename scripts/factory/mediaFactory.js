@@ -5,16 +5,31 @@ function mediaFactory(mediasFiltered) {
 
     function getMediaCardDOM(media) {
 
-        const { id, photographerId, title, image, video, likes } = media;
+        const { title, image, video, likes } = media;
         const article = document.createElement('article');
+        const rowDiv = document.createElement('div')
+        rowDiv.classList.add("row");
+
+        const gapDiv = document.createElement('div')
+        gapDiv.classList.add("gap");
+
+        const likeIcon = document.createElement("img");
+        likeIcon.setAttribute('src', '/assets/icons/like.svg');
+        likeIcon.setAttribute('alt', 'like');
+        likeIcon.classList.add("like");
+
+
+
         const h2 = document.createElement('h2');
         const h3 = document.createElement('h3');
 
         h2.textContent = title;
-        h3.textContent = likes + " ❤";
-        article.appendChild(h2);
-        article.appendChild(h3);
+        h3.textContent = likes;
+        rowDiv.appendChild(h2);
+        gapDiv.appendChild(h3);
+        gapDiv.appendChild(likeIcon);
 
+        rowDiv.appendChild(gapDiv);
         if (image) {
             const img = createImage(media);
             article.appendChild(img);
@@ -23,7 +38,7 @@ function mediaFactory(mediasFiltered) {
             const vid = createVideo(media);
             article.appendChild(vid);
         }
-
+        article.appendChild(rowDiv)
         return article;
     }
 
@@ -95,22 +110,7 @@ function mediaFactory(mediasFiltered) {
             lightBoxVideo.setAttribute('src', `assets/${media.photographerId}/${media.video}`);
             lightBoxVideo.setAttribute('alt', media.title);
         }
-        /*
-                const lightBox = document.querySelector('#lightBox-modal');
-        
-                lightBox.innerHTML = '';
-                lightBox.style.display = "flex";
-        
-                lightBox.appendChild(prev);
-                if (media.image) {
-                    lightBox.appendChild(lightBoxImage);
-                    lightBox.appendChild(lightBoxTitle);
-                } else if (media.video) {
-                    lightBox.appendChild(lightBoxVideo);
-                    lightBox.appendChild(lightBoxTitle);
-                }
-                lightBox.appendChild(next);
-                lightBox.appendChild(closeButton);*/
+
         const lightBox = document.querySelector('#lightBox-modal');
 
         // Création d'une div pour envelopper l'image/vidéo et le paragraphe
@@ -152,71 +152,3 @@ function mediaFactory(mediasFiltered) {
 
     return { getMediaCardDOM, createImage, createVideo, medias };
 }
-
-
-
-/*
-
-function mediaFactory(mediasFiltered) {
-
-    const medias = mediasFiltered;
-    function getMediaCardDOM(media) {
-
-        const { id, photographerId, title, image, video, likes } = media;
-        const article = document.createElement('article');
-        const h2 = document.createElement('h2');
-        const h3 = document.createElement('h3');
-
-        h2.textContent = title;
-        h3.textContent = likes + " ❤";
-        article.appendChild(h2);
-        article.appendChild(h3);
-
-        if (image) {
-            const img = createImage(media);
-            article.appendChild(img);
-        }
-        if (video) {
-            const vid = createVideo(media);
-            article.appendChild(vid);
-        }
-
-        return article;
-    }
-
-    function createImage(media) {
-        const img = document.createElement('img');
-        img.setAttribute('src', `assets/${media.photographerId}/${media.image}`);
-        img.setAttribute('alt', media.title);
-        //addeventlist 
-        const index = medias.findIndex((element) => {
-            return element.id === media.id;
-        })
-        const indexPrev = (index - 1) < 0 ? medias.length - 1 : index - 1;
-        const indexNext = (index + 1) >= medias.length ? 0 : index + 1;
-        console.log(indexPrev)
-        console.log(index)
-        console.log(indexNext)
-
-        console.log(medias[index - 1]) // 
-        img.onclick = displaylightBox(media, medias[indexPrev].id, medias[indexNext].id); //<-- donner id du media d'avant
-        console.log(media)
-        console.log(medias)
-
-        return img;
-
-    }
-
-    function createVideo(videoData) {
-        const video = document.createElement('video');
-        //video.setAttribute('src', `/assets/${videoData.video}`);
-        video.setAttribute('src', `assets/${videoData.photographerId}/${videoData.video}`);
-        // video.setAttribute('controls', false);
-        video.setAttribute('alt', videoData.title);
-        return video;
-    }
-
-
-    return { getMediaCardDOM, createImage, createVideo, medias };
-}
-*/
