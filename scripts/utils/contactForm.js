@@ -1,22 +1,70 @@
 const modalOverlay = document.createElement("div");
 modalOverlay.classList.add("modal-overlay");
-
-const form = document.querySelector('form');
-
 const modal = document.getElementById("contact_modal");
+const form = document.querySelector('form');
+const openModalBtn = document.querySelector('.contact_button');
+
+const body = document.querySelector('body');
+const mainWrapper = document.getElementById("main-wrapper");
+
 function displayModal() {
     modal.style.display = "block";
-
     modalOverlay.appendChild(modal);
     document.body.appendChild(modalOverlay);
+
+    mainWrapper.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('aria-hidden', 'false');
+    body.classList.add('no-scroll');
+
+    const closeButton = modal.querySelector('.close-btn');
+    closeButton.focus();
 }
 
 function closeModal() {
+    mainWrapper.setAttribute('aria-hidden', 'false');
+    modal.setAttribute('aria-hidden', 'true');
+    body.classList.remove('no-scroll');
     modal.style.display = "none";
 
     document.body.appendChild(modal);
     modalOverlay.remove();
 }
+
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    const modalAriaHidden = modal.getAttribute('aria-hidden');
+
+    if (modalAriaHidden === 'false' && key === 'Escape') {
+        closeModal();
+    }
+});
+
+modal.addEventListener('keydown', function (e) {
+    const tabKey = 'Tab';
+    const shiftKey = e.shiftKey;
+    const enterKey = 'Enter';
+    const spaceKey = ' ';
+
+    if (e.key === tabKey) {
+        const focusElements = modal.querySelectorAll('button, [href], input, select, textarea, img');
+        const firstElement = focusElements[0];
+        const lastElement = focusElements[focusElements.length - 1];
+
+
+        if (shiftKey && document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+
+        } else if (!shiftKey && document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+        } else if (e.key === enterKey || e.key === spaceKey) {
+
+            closeModal.focus();
+        }
+    }
+});
+
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -38,7 +86,6 @@ form.addEventListener("submit", (e) => {
         console.log("Message : ", message);
         form.reset();
     }
-
 
 });
 

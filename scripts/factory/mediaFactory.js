@@ -130,6 +130,7 @@ function mediaFactory(mediasFiltered) {
 
         lightBox.appendChild(next);
         lightBox.appendChild(closeButton);
+
         prev.addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + medias.length) % medias.length;
             const prevMedia = medias[currentIndex];
@@ -148,7 +149,6 @@ function mediaFactory(mediasFiltered) {
         });
 
     }
-
 
     return { getMediaCardDOM, createImage, createVideo, medias };
 }
