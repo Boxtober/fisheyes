@@ -1,7 +1,7 @@
 
 
 function photographerFactory(photographer) { // photographerFactory
-    const { id, name, city, tagline, country, portrait, price } = photographer;
+    const { id, name, city, tagline, country, portrait, price, likes } = photographer;
 
     function getUserCardDOM() {
 
@@ -44,13 +44,17 @@ function photographerFactory(photographer) { // photographerFactory
             console.error('Photographer not found');
             return null;
         }
+
         const picture = `/assets/Photographers-ID-Photos/${portrait}`;
 
         const displayDataByIdSection = document.querySelector(".photograph-header");
 
+        /*********************************/
+
+
+        /*************************************** */
         const article = document.createElement('article');
         const div = document.createElement('div');
-
         const img = document.createElement('img');
         img.setAttribute("src", picture);
 
@@ -71,7 +75,6 @@ function photographerFactory(photographer) { // photographerFactory
 
         displayDataByIdSection.appendChild(article);
         displayDataByIdSection.appendChild(div);
-
 
         const contactButton = document.querySelector(".contact_button");
         if (contactButton) {

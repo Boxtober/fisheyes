@@ -3,6 +3,7 @@ modalOverlay.classList.add("modal-overlay");
 const modal = document.getElementById("contact_modal");
 const form = document.querySelector('form');
 const openModalBtn = document.querySelector('.contact_button');
+const closeButton = modal.querySelector('.close-btn');
 
 const body = document.querySelector('body');
 const mainWrapper = document.getElementById("main-wrapper");
@@ -59,11 +60,35 @@ modal.addEventListener('keydown', function (e) {
             e.preventDefault();
             firstElement.focus();
         } else if (e.key === enterKey || e.key === spaceKey) {
-
             closeModal.focus();
         }
     }
 });
+
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const firstName = document.getElementById("firstName").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    let firstNameValid = checkFirstname();
+    let nameValid = checkUserName();
+    let emailValid = checkEmail();
+    let messageValid = checkMessage();
+
+    if (firstNameValid && nameValid && emailValid && messageValid) {
+        closeModal();
+        console.log("Prenom : ", firstName);
+        console.log("Nom : ", name);
+        console.log("Email : ", email);
+        console.log("Message : ", message);
+        form.reset();
+    }
+
+});
+
 
 
 form.addEventListener("submit", (e) => {
@@ -198,3 +223,5 @@ function checkMessage() {
     }
 }
 
+openModalBtn.addEventListener('click', displayModal);
+closeButton.addEventListener('click', closeModal);

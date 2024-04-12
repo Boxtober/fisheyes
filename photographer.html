@@ -18,27 +18,29 @@
     </header>
 
     <div class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button tabindex="0" aria-label="Ouvrir la fenêtre de contact" class="contact_button">Contactez-moi</button>
     </div>
 
 
     <div class="photographer-details-section"></div>
 
-    <div class="dropdown" aria-haspopup="listbox" aria-expanded="false">
+    <div class="dropdown" aria-haspopup="listbox" aria-expanded="false" aria-hidden="true">
       <label for="dropdown-trigger">Trier par</label>
 
       <ul role="listbox" aria-haspopup="listbox" aria-controls="dropdown-options">
 
-        <img src="assets/icons/arrow-filter.svg" id="dropdown-options">
+        <img role="button" tabindex="1" src="assets/icons/arrow-filter.svg" id="dropdown-options">
 
-        <li role="option" aria-selected="true" class="filterByLikes" aria-expanded="false">
+        <li tabindex="2" role="option" aria-selected="true" class="filterByLikes" aria-expanded="false">
           Popularité</li>
 
-        <li role="option" aria-selected="false" class="filterByDate dropdown-content" aria-expanded="false"> <span>
+        <li tabindex="2" role="option" aria-selected="false" class="filterByDate dropdown-content"
+          aria-expanded="false"> <span>
           </span>
           Date</li>
 
-        <li role="option" aria-selected="false" class="filterByTitle dropdown-content" aria-expanded="false">
+        <li tabindex="2" role="option" aria-selected="false" class="filterByTitle dropdown-content"
+          aria-expanded="false">
           <span>
           </span> Titre
         </li>
@@ -55,7 +57,8 @@
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" class="close-btn" id="close-btn-id" tabindex="1" />
+          <img src="assets/icons/close.svg" class="close-btn" id="close-btn-id" tabindex="0"
+            aria-label="Fermer la fenêtre de contact" />
         </header>
         <form method="post">
           <div>
@@ -79,6 +82,9 @@
         </form>
       </div>
     </div>
+
+    <div id="cta"></div>
+
   </main>
 
   <script src="scripts/utils/lightBox.js"></script>
