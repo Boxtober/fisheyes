@@ -6,7 +6,6 @@ async function getPhotographers() {
         }
 
         const data = await response.json();
-        console.log('ALL Data from JSONNNNNNNN:', data);
 
         if (!data || !data.photographers) {
             console.error('Invalid data from JSON:', data);

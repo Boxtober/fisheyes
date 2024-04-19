@@ -14,23 +14,28 @@ function mediasFactories(medias) {
     }
     let dropdownOptions = document.getElementById("dropdown-options");
     let dropdownContent = document.querySelectorAll(".dropdown-content");
+
     const likes = document.querySelector(".filterByLikes");
+
     const displayGalery = () => {
         const mediasSection = document.querySelector(".medias_section");
         mediasSection.innerHTML = '';
+        const mediaFactory = mediaFactory(mediasFiltered);
+
+        //  mediaFactories.getCtaDom();
 
         mediasFiltered.forEach((media, index) => {
-            const mediaFactories = mediaFactory(mediasFiltered);
-            const mediaCard = mediaFactories.getMediaCardDOM(media);
+            const mediaCard = mediaFactory.getMediaCardDOM(media);
+
             //  mediaCard.setAttribute('tabindex', index + 1);
             mediaCard.setAttribute('aria-label', `Media ${index + 1}: ${media.title}`);
             mediasSection.appendChild(mediaCard);
+
         });
+
     }
 
     function filterByLikes() {
-
-
 
         dropdownOptions.addEventListener("click", function () {
             dropdownContent.forEach((element) => {
@@ -86,8 +91,7 @@ function mediasFactories(medias) {
             } else if (event.key === 'Escape') {
                 dropdownContent.forEach((element) => {
                     element.classList.remove("active");
-                    console.log('echap')
-                }); console.log('echap')
+                });
             }
         });
 

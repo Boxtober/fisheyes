@@ -1,7 +1,39 @@
 
 
-function photographerFactory(photographer) { // photographerFactory
+function photographerFactory(photographer) {
     const { id, name, city, tagline, country, portrait, price, likes } = photographer;
+
+    /*
+    function getCtaDom() {
+        //const { price, likes } = media;
+
+        currentLikes = likes;
+
+        //const ctaSection = document.getElementById("cta");
+
+        const ctaContainer = document.createElement('div');
+        ctaContainer.classList.add("cta-container");
+
+        const ctaIcon = document.createElement("img");
+        ctaIcon.setAttribute('src', '/assets/icons/like.svg');
+        ctaIcon.setAttribute('alt', 'Like icon');
+        ctaIcon.classList.add("cta-icon");
+
+        const ctaLikes = document.createElement('p');
+        ctaLikes.classList.add("cta-likes");
+        //ctaLikes.textContent = currentLikes;
+
+        const ctaPrice = document.createElement('p');
+        ctaPrice.classList.add("cta-price");
+        ctaPrice.textContent = price + `€/jour`;
+
+        // ctaSection.appendChild(ctaContainer);
+        ctaContainer.appendChild(ctaPrice);
+        ctaContainer.appendChild(ctaIcon);
+        //ctaContainer.appendChild(ctaLikes);
+
+        return ctaContainer;
+    }*/
 
     function getUserCardDOM() {
 
@@ -38,6 +70,7 @@ function photographerFactory(photographer) { // photographerFactory
         return link;
     }
 
+
     function getIdUserCardDOM() {
 
         if (!photographer) {
@@ -50,6 +83,7 @@ function photographerFactory(photographer) { // photographerFactory
         const displayDataByIdSection = document.querySelector(".photograph-header");
 
         /*********************************/
+
 
 
         /*************************************** */

@@ -1,50 +1,85 @@
 function mediaFactory(mediasFiltered) {
+    // console.log('mediasFiltered :', mediasFiltered)
 
+    this.likes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
+    this.price = mediasFiltered.price;
+
+    console.log(likes);
     const medias = mediasFiltered;
     let currentIndex = 0;
+    let currentLikes = 0;
+    let liked = false;
+    let h3;
+
+    function likeIconClick() {
+        if (!liked) {
+            likes++;
+            currentLikes++;
+            liked = true;
+        } else {
+            likes--;
+            currentLikes--;
+            liked = false;
+        }
+        // if (h3) { h3.textContent = currentLikes; }
+        console.log(likes);
+    }
+
+    function getCtaDom() {
+
+        currentLikes = likes;
+
+        const ctaSection = document.getElementById("cta");
+
+        const ctaContainer = document.createElement('div');
+        ctaContainer.classList.add("cta-container");
+
+        const ctaIcon = document.createElement("img");
+        ctaIcon.setAttribute('src', '/assets/icons/like.svg');
+        ctaIcon.setAttribute('alt', 'Like icon');
+        ctaIcon.classList.add("cta-icon");
+
+        const ctaLikes = document.createElement('p');
+        ctaLikes.classList.add("cta-likes");
+        ctaLikes.textContent = currentLikes;
+
+        const ctaPrice = document.createElement('p');
+        ctaPrice.classList.add("cta-price");
+        ctaPrice.textContent = price + `€/jour`;
+
+        ctaSection.appendChild(ctaContainer);
+        ctaContainer.appendChild(ctaPrice);
+        ctaContainer.appendChild(ctaIcon);
+        ctaContainer.appendChild(ctaLikes);
+
+        return ctaSection;
+    }
+    console.log('coucou:', getCtaDom())
 
     function getMediaCardDOM(media) {
-
-        const { title, image, video, likes, price } = media;
-
-        const cta = document.getElementById("cta")
+        const { title, image, video, likes } = media;
 
         const article = document.createElement('article');
-        const rowDiv = document.createElement('div')
+        const rowDiv = document.createElement('div');
         rowDiv.classList.add("row");
 
-        const gapDiv = document.createElement('div')
+        const gapDiv = document.createElement('div');
         gapDiv.classList.add("gap");
 
         const likeIcon = document.createElement("img");
         likeIcon.setAttribute('src', '/assets/icons/like.svg');
         likeIcon.setAttribute('alt', 'like');
         likeIcon.classList.add("like");
+        likeIcon.addEventListener('click', likeIconClick);
 
         const h2 = document.createElement('h2');
-        const h3 = document.createElement('h3');
-
-        let currentLikes = likes;
-        let liked = false;
-
+        h3 = document.createElement('h3');
+        currentLikes = likes;
+        // let liked = false;
         h2.textContent = title;
         h3.textContent = currentLikes;
-        rowDiv.appendChild(h2);
-        gapDiv.appendChild(h3);
-        gapDiv.appendChild(likeIcon);
 
-        rowDiv.appendChild(gapDiv);
-        if (image) {
-            const img = createImage(media);
-            article.appendChild(img);
-        }
-        if (video) {
-            const vid = createVideo(media);
-            article.appendChild(vid);
-        }
-
-        article.appendChild(rowDiv)
-
+        /*
         likeIcon.addEventListener('click', () => {
             if (!liked) {
                 currentLikes++;
@@ -54,28 +89,24 @@ function mediaFactory(mediasFiltered) {
                 liked = false;
             }
             h3.textContent = currentLikes;
-        });
+        });*/
 
-        const ctaContainer = document.createElement('section');
-        ctaContainer.classList.add("cta-container");
+        if (image) {
+            const img = createImage(media);
+            article.appendChild(img);
+        }
+        if (video) {
+            const vid = createVideo(media);
+            article.appendChild(vid);
+        }
 
-        const ctaIcon = document.createElement("img");
-        ctaIcon.setAttribute('src', '/assets/icons/like.svg');
-        ctaIcon.setAttribute('alt', 'Like icon');
-        ctaIcon.classList.add("cta-icon");
+        rowDiv.appendChild(h2);
 
-        const ctaLikes = document.createElement('p');
-        ctaLikes.classList.add("cta-likes")
-        ctaLikes.textContent = likes;
+        gapDiv.appendChild(h3);
+        gapDiv.appendChild(likeIcon);
 
-        const ctaPrice = document.createElement('p');
-        ctaPrice.classList.add("cta-price");
-        ctaPrice.textContent = price + `€/jour`;
-
-        ctaContainer.appendChild(ctaPrice);
-        ctaContainer.appendChild(ctaIcon);
-        ctaContainer.appendChild(ctaLikes);
-        cta.appendChild(ctaContainer)
+        rowDiv.appendChild(gapDiv);
+        article.appendChild(rowDiv);
 
         return article;
     }
@@ -90,8 +121,6 @@ function mediaFactory(mediasFiltered) {
         img.addEventListener('click', () => {
             currentIndex = medias.findIndex(element => element.id === media.id);
             displaylightBox(media);
-
-            console.log('cest laaaaaaaa')
         });
 
         img.addEventListener('keydown', (event) => {
@@ -110,7 +139,6 @@ function mediaFactory(mediasFiltered) {
 
         video.setAttribute('src', `assets/${media.photographerId}/${media.video}`);
         video.setAttribute('alt', media.title);
-
 
         video.addEventListener('click', () => {
             currentIndex = medias.findIndex(element => element.id === media.id);
@@ -184,6 +212,15 @@ function mediaFactory(mediasFiltered) {
             displaylightBox(prevMedia);
         });
 
+        prev.addEventListener("keydown", function (event) {
+            if (event.key === 'ArrowRight') {
+                currentIndex = (currentIndex - 1 + medias.length) % medias.length;
+                const prevMedia = medias[currentIndex];
+                displaylightBox(prevMedia);
+            }
+        });
+
+
         next.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % medias.length;
             const nextMedia = medias[currentIndex];
@@ -191,11 +228,20 @@ function mediaFactory(mediasFiltered) {
             displaylightBox(nextMedia);
         });
 
+
+        next.addEventListener("keydown", function (event) {
+            if (event.key === 'ArrowLeft') {
+                currentIndex = (currentIndex + 1) % medias.length;
+                const nextMedia = medias[currentIndex];
+                console.log(nextMedia)
+                displaylightBox(nextMedia);
+            }
+        });
+
         closeButton.addEventListener('click', () => {
             lightBox.style.display = "none";
         });
-
     }
 
-    return { getMediaCardDOM, createImage, createVideo, medias };
+    return { getMediaCardDOM, createImage, createVideo, medias, likeIconClick, getCtaDom };
 }

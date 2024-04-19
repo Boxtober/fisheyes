@@ -11,16 +11,20 @@ async function initPhotographerPage() {
     }
 
     const photographersSectionId = document.querySelector(".photographer-details-section");
+
+    // const cta = document.getElementById("cta");
+
     const phographerFactories = photographerFactory(photographer);
     const detailUserCardDOM = phographerFactories.getIdUserCardDOM(photographer);
+
 
     photographersSectionId.appendChild(detailUserCardDOM);
 
     const { medias } = await getMediasByPhotographerId(photographer.id);
 
     const mediasFacto = mediasFactories(medias);
-    mediasFacto.displayMedias()
-
+    mediasFacto.displayMedias();
+    console.log('mediasFacto', mediasFacto);
 }
 
 initPhotographerPage();

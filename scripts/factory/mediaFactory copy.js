@@ -76,7 +76,7 @@ function mediaFactory(mediasFiltered) {
         ctaContainer.appendChild(ctaIcon);
         ctaContainer.appendChild(ctaLikes);
         cta.appendChild(ctaContainer)
-
+        article.appendChild(rowDiv)
         return article;
     }
 
