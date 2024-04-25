@@ -57,7 +57,7 @@ function mediaFactory(mediasFiltered) {
     console.log('coucou:', getCtaDom())
 
     function getMediaCardDOM(media) {
-        const { title, image, video, likes } = media;
+        const { title, image, video, likes, price } = media;
 
         const article = document.createElement('article');
         const rowDiv = document.createElement('div');
