@@ -195,6 +195,11 @@ form input {
     line-height: normal;
 }
 
+.medias_section>article>div>div>.liked {
+    color: green;
+    font-weight: 800;
+}
+
 /*
 .dropdown {
     display: flex;

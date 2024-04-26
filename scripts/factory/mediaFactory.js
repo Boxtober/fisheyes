@@ -1,7 +1,8 @@
 function mediaFactory(mediasFiltered) {
     const likesMap = new Map(mediasFiltered.map(media => [media.id, media.likes]));
 
-    // Calcul du nombre total de likes
+
+    // nbr total de likes
     let totalLikes = Array.from(likesMap.values()).reduce((total, likes) => total + likes, 0);
 
     const medias = mediasFiltered;
@@ -11,11 +12,11 @@ function mediaFactory(mediasFiltered) {
         const currentLikes = likesMap.get(mediaId);
 
         if (currentLikes === 1) {
-            // Si l'utilisateur clique sur un like déjà liké, on décrémente
+
             likesMap.set(mediaId, 0);
             totalLikes--;
         } else {
-            // Sinon, on incrémente
+
             likesMap.set(mediaId, 1);
             totalLikes++;
         }
@@ -31,7 +32,7 @@ function mediaFactory(mediasFiltered) {
         }
     }
 
-    function getCtaDom() {
+    function getCtaDom(price) {
         const ctaSection = document.getElementById("cta");
 
         const ctaContainer = document.createElement('div');
@@ -44,12 +45,11 @@ function mediaFactory(mediasFiltered) {
 
         const ctaLikes = document.createElement('p');
         ctaLikes.classList.add("cta-likes");
-        // Convertir likeStates en chaîne de caractères
         ctaLikes.textContent = totalLikes;
 
         const ctaPrice = document.createElement('p');
         ctaPrice.classList.add("cta-price");
-        ctaPrice.textContent = `€/jour`;
+        ctaPrice.textContent = price + `€/jour`;
 
         ctaContainer.appendChild(ctaPrice);
         ctaContainer.appendChild(ctaIcon);
@@ -59,7 +59,9 @@ function mediaFactory(mediasFiltered) {
 
         return ctaSection;
     }
+
     getCtaDom()
+
     function getMediaCardDOM(media) {
         const { id, title, image, video, likes } = media;
 
@@ -73,17 +75,33 @@ function mediaFactory(mediasFiltered) {
         const likeIcon = document.createElement("img");
         likeIcon.setAttribute('src', '/assets/icons/like.svg');
         likeIcon.setAttribute('alt', 'like');
-        likeIcon.classList.add("like");
+
         likeIcon.addEventListener('click', () => likeIconClick(id));
 
         const h2 = document.createElement('h2');
         const h3 = document.createElement('h3');
-        h2.textContent = title;
 
+        h2.textContent = title;
         h3.textContent = likes;
-        // Ajouter un événement de clic sur h3 pour mettre à jour les likes
-        // h3.addEventListener('click', () => likeIconClick(id));
-        // h3.textContent = likesMap.get(id);
+
+        let liked = false;
+
+        likeIcon.addEventListener('click', () => {
+            if (!liked) {
+
+                media.likes++;
+                h3.textContent = media.likes;
+                liked = true;
+                h3.classList.add('liked');
+
+            } else {
+
+                media.likes--;
+                h3.textContent = media.likes;
+                liked = false;
+                h3.classList.remove('liked');
+            }
+        });
 
         if (image) {
             const img = createImage(media);
@@ -104,6 +122,7 @@ function mediaFactory(mediasFiltered) {
 
         return article;
     }
+
 
     function createImage(media) {
 
@@ -143,6 +162,9 @@ function mediaFactory(mediasFiltered) {
 
     function displaylightBox(media) {
 
+        const mainPage = document.querySelector('body');
+        mainPage.setAttribute('tabindex', '-1');
+        const allTabIndexElements = document.querySelectorAll('[tabindex]');
         const lightBoxOverlay = document.createElement("div");
         lightBoxOverlay.classList.add("lightBox-overlay");
 
@@ -168,13 +190,25 @@ function mediaFactory(mediasFiltered) {
         closeIcon.setAttribute('alt', 'next');
         closeButton.appendChild(closeIcon);
 
+
+        allTabIndexElements.forEach(element => {
+            element.setAttribute('tabindex', '-1');
+        });
+
+        closeButton.addEventListener('click', () => {
+            mainPage.setAttribute('tabindex', '0');
+
+            allTabIndexElements.forEach(element => {
+                element.setAttribute('tabindex', '0');
+            });
+        });
+
         const lightBoxImage = document.createElement('img');
         const lightBoxTitle = document.createElement('p');
         lightBoxTitle.textContent = media.title;
         const lightBoxVideo = document.createElement('video');
 
         if (media.image) {
-
             lightBoxImage.setAttribute('src', `assets/${media.photographerId}/${media.image}`);
             lightBoxImage.setAttribute('alt', media.title);
         } else if (media.video) {

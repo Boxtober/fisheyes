@@ -48,6 +48,8 @@ async function getMediasByPhotographerId(photographerId) {
         return {
             medias
         };
+
+
     } catch (error) {
         console.error(error);
         return {
