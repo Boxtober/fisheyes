@@ -76,6 +76,18 @@ function photographerFactory(photographer) {
             displayDataByIdSection.insertBefore(contactButton, div);
         }
 
+        const ctaSection = document.getElementById("cta");
+
+        const ctaContainer = document.createElement('div');
+        ctaContainer.classList.add("cta-container");
+
+        const ctaPrice = document.createElement('p');
+        ctaPrice.classList.add("cta-price");
+        ctaPrice.textContent = price + `€/jour`;
+
+
+        ctaContainer.appendChild(ctaPrice);
+        ctaSection.appendChild(ctaContainer);
         return displayDataByIdSection;
 
     }

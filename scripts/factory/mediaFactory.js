@@ -1,7 +1,6 @@
 function mediaFactory(mediasFiltered) {
     const likesMap = new Map(mediasFiltered.map(media => [media.id, media.likes]));
 
-
     // nbr total de likes
     let totalLikes = Array.from(likesMap.values()).reduce((total, likes) => total + likes, 0);
 
@@ -32,35 +31,35 @@ function mediaFactory(mediasFiltered) {
         }
     }
 
-    function getCtaDom(price) {
-        const ctaSection = document.getElementById("cta");
+    function getCtaDom() {
+        const ctaContainer = document.querySelector(".cta-container");
+        // ctaSection.innerHTML = '';
+        let ctaIconElement = document.querySelector('.cta-icon');
+        let ctaLikesElement = document.querySelector('.cta-likes');
 
-        const ctaContainer = document.createElement('div');
-        ctaContainer.classList.add("cta-container");
+        if (ctaIconElement && ctaLikesElement) {
 
+            ctaIconElement.remove();
+            ctaIconElement.remove();
+        }
         const ctaIcon = document.createElement("img");
         ctaIcon.setAttribute('src', '/assets/icons/like.svg');
         ctaIcon.setAttribute('alt', 'Like icon');
         ctaIcon.classList.add("cta-icon");
 
+
         const ctaLikes = document.createElement('p');
         ctaLikes.classList.add("cta-likes");
         ctaLikes.textContent = totalLikes;
 
-        const ctaPrice = document.createElement('p');
-        ctaPrice.classList.add("cta-price");
-        ctaPrice.textContent = price + `€/jour`;
-
-        ctaContainer.appendChild(ctaPrice);
         ctaContainer.appendChild(ctaIcon);
         ctaContainer.appendChild(ctaLikes);
 
-        ctaSection.appendChild(ctaContainer);
+        return ctaContainer;
 
-        return ctaSection;
     }
 
-    getCtaDom()
+
 
     function getMediaCardDOM(media) {
         const { id, title, image, video, likes } = media;

@@ -21,6 +21,7 @@ function mediasFactories(medias) {
         const mediasSection = document.querySelector(".medias_section");
         mediasSection.innerHTML = '';
         const mediaFactoryFiltered = mediaFactory(mediasFiltered);
+        mediaFactoryFiltered.getCtaDom();
         //const mediaFactory = mediaFactory(mediasFiltered);
 
         //  mediaFactories.getCtaDom();
