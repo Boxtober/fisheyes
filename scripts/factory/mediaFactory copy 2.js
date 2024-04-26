@@ -1,34 +1,29 @@
 function mediaFactory(mediasFiltered) {
-    const likesMap = new Map(mediasFiltered.map(media => [media.id, media.likes]));
 
-    // Calcul du nombre total de likes
-    let totalLikes = Array.from(likesMap.values()).reduce((total, likes) => total + likes, 0);
+    this.likes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
+    this.price = mediasFiltered.price;
 
+    console.log(likes);
     const medias = mediasFiltered;
     let currentIndex = 0;
+    let currentLikes = 0; // Déclaration de currentLikes
+    let liked = false;
+    let h3;
+    let likeStates = {};
 
     function likeIconClick(mediaId) {
-        const currentLikes = likesMap.get(mediaId);
-
-        if (currentLikes === 1) {
-            // Si l'utilisateur clique sur un like déjà liké, on décrémente
-            likesMap.set(mediaId, 0);
-            totalLikes--;
+        const media = medias.find(m => m.id === mediaId);
+        if (!likeStates[mediaId]) {
+            likes++;
+            currentLikes++;
+            likeStates[mediaId] = true;
         } else {
-            // Sinon, on incrémente
-            likesMap.set(mediaId, 1);
-            totalLikes++;
+            likes--;
+            currentLikes--;
+            likeStates[mediaId] = false;
         }
-
-        console.log('totalLikes :', totalLikes);
-        updateLikesCounter(totalLikes);
-    }
-
-    function updateLikesCounter(likes) {
-        const ctaLikes = document.querySelector(".cta-likes");
-        if (ctaLikes) {
-            ctaLikes.textContent = likes;
-        }
+        console.log(likes);
+        console.log(currentLikes); // Vérification dans la console
     }
 
     function getCtaDom() {
@@ -45,23 +40,23 @@ function mediaFactory(mediasFiltered) {
         const ctaLikes = document.createElement('p');
         ctaLikes.classList.add("cta-likes");
         // Convertir likeStates en chaîne de caractères
-        ctaLikes.textContent = totalLikes;
+        ctaLikes.textContent = JSON.stringify(likeStates);
 
         const ctaPrice = document.createElement('p');
         ctaPrice.classList.add("cta-price");
-        ctaPrice.textContent = `€/jour`;
+        ctaPrice.textContent = price + `€/jour`;
 
+        ctaSection.appendChild(ctaContainer);
         ctaContainer.appendChild(ctaPrice);
         ctaContainer.appendChild(ctaIcon);
         ctaContainer.appendChild(ctaLikes);
 
-        ctaSection.appendChild(ctaContainer);
-
         return ctaSection;
     }
-    getCtaDom()
+    console.log('coucou:', getCtaDom())
+
     function getMediaCardDOM(media) {
-        const { id, title, image, video, likes } = media;
+        const { title, image, video, likes } = media;
 
         const article = document.createElement('article');
         const rowDiv = document.createElement('div');
@@ -74,16 +69,26 @@ function mediaFactory(mediasFiltered) {
         likeIcon.setAttribute('src', '/assets/icons/like.svg');
         likeIcon.setAttribute('alt', 'like');
         likeIcon.classList.add("like");
-        likeIcon.addEventListener('click', () => likeIconClick(id));
+        likeIcon.addEventListener('click', likeIconClick);
 
         const h2 = document.createElement('h2');
-        const h3 = document.createElement('h3');
+        h3 = document.createElement('h3');
+        likeStates = likes;
+        // let liked = false;
         h2.textContent = title;
+        h3.textContent = likeStates;
 
-        h3.textContent = likes;
-        // Ajouter un événement de clic sur h3 pour mettre à jour les likes
-        // h3.addEventListener('click', () => likeIconClick(id));
-        // h3.textContent = likesMap.get(id);
+        /*
+        likeIcon.addEventListener('click', () => {
+            if (!liked) {
+                currentLikes++;
+                liked = true;
+            } else {
+                currentLikes--;
+                liked = false;
+            }
+            h3.textContent = currentLikes;
+        });*/
 
         if (image) {
             const img = createImage(media);

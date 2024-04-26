@@ -20,13 +20,13 @@ function mediasFactories(medias) {
     const displayGalery = () => {
         const mediasSection = document.querySelector(".medias_section");
         mediasSection.innerHTML = '';
-        const mediaFactoryHello = mediaFactory(mediasFiltered);
+        const mediaFactoryFiltered = mediaFactory(mediasFiltered);
         //const mediaFactory = mediaFactory(mediasFiltered);
 
         //  mediaFactories.getCtaDom();
 
         mediasFiltered.forEach((media, index) => {
-            const mediaCard = mediaFactoryHello.getMediaCardDOM(media);
+            const mediaCard = mediaFactoryFiltered.getMediaCardDOM(media);
 
             //  mediaCard.setAttribute('tabindex', index + 1);
             mediaCard.setAttribute('aria-label', `Media ${index + 1}: ${media.title}`);

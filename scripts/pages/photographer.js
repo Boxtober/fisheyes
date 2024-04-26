@@ -14,8 +14,8 @@ async function initPhotographerPage() {
 
     // const cta = document.getElementById("cta");
 
-    const phographerFactories = photographerFactory(photographer);
-    const detailUserCardDOM = phographerFactories.getIdUserCardDOM(photographer);
+    const photographerFactories = photographerFactory(photographer);
+    const detailUserCardDOM = photographerFactories.getIdUserCardDOM(photographer);
 
 
     photographersSectionId.appendChild(detailUserCardDOM);
