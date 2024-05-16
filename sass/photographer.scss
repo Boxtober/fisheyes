@@ -9,8 +9,8 @@
     align-items: center;
     flex-direction: column;
     height: 100%;
-    background-color: #FAFAFA;
-    color: #D3573C;
+    background-color: var(--grey);
+    color: var(--light-red);
     font-size: 36px;
     padding: 55px;
 
@@ -20,7 +20,8 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        background-color: #FAFAFA;
+        background-color: var(--grey);
+        ;
         height: 300px;
         width: 100%;
 
@@ -39,18 +40,18 @@
         gap: .5rem;
 
         h2 {
-            color: #D3573C;
+            color: var(--light-red);
             font-weight: 400;
             font-size: 64px;
         }
 
         p {
             font-size: 24px;
-            color: #901C1C;
+            color: var(--red);
         }
 
         p:nth-child(3) {
-            color: #525252;
+            color: var(--dark-grey);
             font-size: 18px;
         }
     }
@@ -67,7 +68,7 @@
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: var(--red);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -146,7 +147,7 @@
     bottom: 0;
     right: 0;
     padding: 25px;
-    background: #DB8876;
+    background: var(--orange);
     border-radius: 5px 5px 0 0;
     margin-right: 6rem;
 
@@ -161,7 +162,8 @@
             display: flex;
             flex-direction: row;
             gap: .5rem;
-            color: #000000;
+            color: var(--black);
+            ;
 
             img {
                 filter: brightness(0);
@@ -169,7 +171,6 @@
         }
     }
 }
-
 
 .medias_section>article>div>div>.liked {
     color: green;

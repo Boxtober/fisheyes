@@ -8,8 +8,8 @@
   align-items: center;
   flex-direction: column;
   height: 100%;
-  background-color: #FAFAFA;
-  color: #D3573C;
+  background-color: var(--grey);
+  color: var(--light-red);
   font-size: 36px;
   padding: 55px; }
   .photographer-details-section .photograph-header {
@@ -17,7 +17,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #FAFAFA;
+    background-color: var(--grey);
     height: 300px;
     width: 100%; }
     .photographer-details-section .photograph-header img {
@@ -31,14 +31,14 @@
     align-items: flex-start;
     gap: .5rem; }
     .photographer-details-section article h2 {
-      color: #D3573C;
+      color: var(--light-red);
       font-weight: 400;
       font-size: 64px; }
     .photographer-details-section article p {
       font-size: 24px;
-      color: #901C1C; }
+      color: var(--red); }
     .photographer-details-section article p:nth-child(3) {
-      color: #525252;
+      color: var(--dark-grey);
       font-size: 18px; }
 
 .contact_button {
@@ -49,7 +49,7 @@
   width: 170px;
   height: 70px;
   border: none;
-  background-color: #901C1C;
+  background-color: var(--red);
   border-radius: 5px;
   cursor: pointer; }
 
@@ -105,7 +105,7 @@
   bottom: 0;
   right: 0;
   padding: 25px;
-  background: #DB8876;
+  background: var(--orange);
   border-radius: 5px 5px 0 0;
   margin-right: 6rem; }
   #cta .cta-container {
@@ -118,7 +118,7 @@
       display: flex;
       flex-direction: row;
       gap: .5rem;
-      color: #000000; }
+      color: var(--black); }
       #cta .cta-container .row img {
         filter: brightness(0); }
 
