@@ -50,7 +50,6 @@ function mediasFactories(medias) {
         mediasObject.forEach((media, index) => {
             const mediaCard = mediaFactoryFiltered.getMediaCardDOM(media);
 
-            //  mediaCard.setAttribute('tabindex', index + 1);
             mediaCard.setAttribute('aria-label', `Media ${index + 1}: ${media.title}`);
             mediasSection.appendChild(mediaCard);
 

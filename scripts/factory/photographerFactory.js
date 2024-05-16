@@ -79,7 +79,7 @@ function photographerFactory(photographer) {
         if (contactButton) {
             displayDataByIdSection.insertBefore(contactButton, div);
         }
-        /**/
+
         const ctaSection = document.getElementById("cta");
 
         const ctaContainer = document.createElement('div');

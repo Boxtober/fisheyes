@@ -275,6 +275,9 @@ function getCtaDom(likes) { // ajouter le paramètre likes
         ctaLikesElement.remove();
     }
 
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
+
     const ctaIcon = document.createElement("img");
     ctaIcon.setAttribute('src', '/assets/icons/like.svg');
     ctaIcon.setAttribute('alt', 'Like icon');
@@ -283,8 +286,12 @@ function getCtaDom(likes) { // ajouter le paramètre likes
     const ctaLikes = document.createElement('p');
     ctaLikes.classList.add("cta-likes");
     ctaLikes.textContent = likes;
-    ctaContainer.appendChild(ctaIcon);
-    ctaContainer.appendChild(ctaLikes);
+    rowDiv.appendChild(ctaLikes);
+    rowDiv.appendChild(ctaIcon);
+
+
+
+    ctaContainer.appendChild(rowDiv);
     return ctaContainer;
 
 
