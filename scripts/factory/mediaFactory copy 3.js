@@ -1,49 +1,94 @@
 function mediaFactory(mediasFiltered) {
-    console.log('mediasFiltered',);
-    //const likesMap = new Map(mediasFiltered.map(media => [media.id, media.likes]));
-
-
-    // let currentLike = 0;
-    let totalLikes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
-    console.log(totalLikes);
     const medias = mediasFiltered;
-    let currentIndex = 0;
+    /*
+        const likesMap = new Map(mediasFiltered.map(media => [media.id, media.likes]));
+        console.log(likesMap)
+        console.log(mediasFiltered)
+        //    
+        let currentLike = 0;
+        let totalLikes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
+        console.log(totalLikes);
+       
+        let currentIndex = 0;
+        */
+    /*
+        function updateLikesCounter(likes) {
+            const ctaLikes = document.querySelector(".cta-likes");
+            if (ctaLikes) {
+                ctaLikes.textContent = likes;
+            }
+        }*/
+    /**/
 
-    function updateLikesCounter(likes) {
-        const ctaLikes = document.querySelector(".cta-likes");
-        if (ctaLikes) {
-            ctaLikes.textContent = likes;
-        }
-    }
+    function likeIconClick(mediaId) {
+        // const currentLikes = likesMap.get(mediaId);
 
-    function likeIconClick(mediaId, isLiked, likes) {
+        //  const currentLikes = mediasFiltered.find(media => media.id === mediaId).likes;
+        const media = mediasFiltered.find(media => media.id === mediaId);
+        const currentLikes = media.likes;
+        const currentLike = media.liked ? 1 : 0;
 
-        // const currentLikes = mediasFiltered.find(media => media.id === mediaId).likes;
-        // console.log(currentLikes)
-        if (isLiked === 1) {
+        if (currentLike === 1) {
+            h3.textContent = media.likes;
+            h3.classList.remove('liked');
+
             let media = mediasFiltered.find(media => media.id === mediaId)
             console.log(media)
-            likes--;
-            isLiked--;
+            media.likes--;
+            currentLike--;
+            //likesMap.set(mediaId, 0);
             totalLikes--;
-        } else {
 
+        } else {
+            h3.textContent = media.likes;
+            h3.classList.add('liked');
             let media = mediasFiltered.find(media => media.id === mediaId)
             console.log(media);
 
-            likes++;
-            isLiked++;
+            media.likes++;
+            currentLike++;
+
+            //likesMap.set(mediaId, 1);
             totalLikes++;
         }
-
+        console.log('currentLikes :', currentLikes)
         console.log('totalLikes :', totalLikes);
         updateLikesCounter(totalLikes);
     }
 
 
 
+    let totalLikes = mediasFiltered.reduce((total, { likes }) => total + likes, 0)
+    console.log('totalLikes', totalLikes);
+
+    function getCtaDom() {
+        console.log('coucou');
+        const ctaContainer = document.querySelector(".cta-container");
+        let ctaIconElement = document.querySelector('.cta-icon');
+        let ctaLikesElement = document.querySelector('.cta-likes');
+
+        if (ctaIconElement && ctaLikesElement) {
+            ctaIconElement.remove();
+            ctaLikesElement.remove();
+        }
+
+        const ctaIcon = document.createElement("img");
+        ctaIcon.setAttribute('src', '/assets/icons/like.svg');
+        ctaIcon.setAttribute('alt', 'Like icon');
+        ctaIcon.classList.add("cta-icon");
+
+        const ctaLikes = document.createElement('p');
+        ctaLikes.classList.add("cta-likes");
+        ctaLikes.textContent = totalLikes;
+
+        ctaContainer.appendChild(ctaIcon);
+        ctaContainer.appendChild(ctaLikes);
+        return ctaContainer;
+    }
+
+
     function getMediaCardDOM(media) {
-        let { id, title, image, video, likes, isLiked } = media;
+        const { title, image, video, likes } = media;
 
         const article = document.createElement('article');
         const rowDiv = document.createElement('div');
@@ -57,31 +102,17 @@ function mediaFactory(mediasFiltered) {
         likeIcon.setAttribute('alt', 'like');
 
         const h2 = document.createElement('h2');
-        const h3 = document.createElement('h3');
-
         h2.textContent = title;
+        const h3 = document.createElement('h3');
+        h3.classList.add("like-content");
         h3.textContent = likes;
-        updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked' une seule fois
 
-        likeIcon.addEventListener('click', () => {
-            if (isLiked === 1) {
-                likes--;
-                isLiked--;
-                totalLikes--;
-            } else {
-                likes++;
-                isLiked++;
-                totalLikes++;
-            }
+        let liked = media.liked || false;
 
-            media.likes = likes;
-            media.isLiked = isLiked;
-
-            h3.textContent = likes;
-            updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked'
-
-            updateLikesCounter(totalLikes);
-        });
+        /*
+                likeIcon.addEventListener('click', () => {
+                    likeIconClick(media.id)
+                });*/
 
         if (image) {
             const img = createImage(media);
@@ -99,15 +130,6 @@ function mediaFactory(mediasFiltered) {
         article.appendChild(rowDiv);
 
         return article;
-    }
-
-    // Fonction pour mettre à jour la classe 'liked'
-    function updateLikedClass(element, isLiked) {
-        if (isLiked === 1) {
-            element.classList.add('liked');
-        } else {
-            element.classList.remove('liked');
-        }
     }
 
 
@@ -260,32 +282,9 @@ function mediaFactory(mediasFiltered) {
 
     }
 
-    const ctaContainer = getCtaDom(totalLikes);
-
-    return { getMediaCardDOM, createImage, createVideo, medias, likeIconClick, ctaContainer };
+    // const ctaContainer = getCtaDom(totalLikes);
+    return { getMediaCardDOM, createImage, createVideo, medias, getCtaDom };
 }
-
-function getCtaDom(likes) { // ajouter le paramètre likes
-    const ctaContainer = document.querySelector(".cta-container");
-    let ctaIconElement = document.querySelector('.cta-icon');
-    let ctaLikesElement = document.querySelector('.cta-likes');
-
-    if (ctaIconElement && ctaLikesElement) {
-        ctaIconElement.remove();
-        ctaLikesElement.remove();
-    }
-
-    const ctaIcon = document.createElement("img");
-    ctaIcon.setAttribute('src', '/assets/icons/like.svg');
-    ctaIcon.setAttribute('alt', 'Like icon');
-    ctaIcon.classList.add("cta-icon");
-
-    const ctaLikes = document.createElement('p');
-    ctaLikes.classList.add("cta-likes");
-    ctaLikes.textContent = likes;
-    ctaContainer.appendChild(ctaIcon);
-    ctaContainer.appendChild(ctaLikes);
-    return ctaContainer;
+// likeIconClick, ctaContainer
 
 
-}

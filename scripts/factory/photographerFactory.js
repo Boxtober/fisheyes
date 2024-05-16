@@ -8,11 +8,13 @@ function photographerFactory(photographer) {
         const link = document.createElement('a');
         link.setAttribute('href', `photographer.html?id=${id}`);
         link.setAttribute('id', `user-${id}`);
+        link.setAttribute('tabindex', '0');
 
         const article = document.createElement('article');
 
         const img = document.createElement('img');
         img.setAttribute("src", picture);
+        img.setAttribute("alt", "");
 
         const h2 = document.createElement('h2');
         h2.textContent = name;
@@ -26,15 +28,17 @@ function photographerFactory(photographer) {
         const userPrice = document.createElement('span');
         userPrice.textContent = price + `€/jour`;
 
-        article.appendChild(img);
-        article.appendChild(h2);
+        link.appendChild(img);
+        link.appendChild(h2);
+
+        article.appendChild(link);
         article.appendChild(userCity);
         article.appendChild(userTagline);
         article.appendChild(userPrice);
 
-        link.appendChild(article);
-        return link;
+        return article;
     }
+
 
 
     function getIdUserCardDOM() {
@@ -75,7 +79,7 @@ function photographerFactory(photographer) {
         if (contactButton) {
             displayDataByIdSection.insertBefore(contactButton, div);
         }
-
+        /**/
         const ctaSection = document.getElementById("cta");
 
         const ctaContainer = document.createElement('div');
@@ -88,6 +92,8 @@ function photographerFactory(photographer) {
 
         ctaContainer.appendChild(ctaPrice);
         ctaSection.appendChild(ctaContainer);
+
+
         return displayDataByIdSection;
 
     }

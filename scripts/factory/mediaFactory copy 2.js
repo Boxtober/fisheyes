@@ -1,62 +1,53 @@
 function mediaFactory(mediasFiltered) {
-
-    this.likes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
-    this.price = mediasFiltered.price;
-
-    console.log(likes);
+    const likesMap = new Map(mediasFiltered.map(media => [media.id, media.likes]));
+    console.log(likesMap)
+    console.log(mediasFiltered)
+    //    let totalLikes = Array.from(likesMap.values()).reduce((total, likes) => total + likes, 0);
+    let currentLike = 0;
+    let totalLikes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
+    console.log(totalLikes);
     const medias = mediasFiltered;
     let currentIndex = 0;
-    let currentLikes = 0; // Déclaration de currentLikes
-    let liked = false;
-    let h3;
-    let likeStates = {};
+
+    function updateLikesCounter(likes) {
+        const ctaLikes = document.querySelector(".cta-likes");
+        if (ctaLikes) {
+            ctaLikes.textContent = likes;
+        }
+    }
 
     function likeIconClick(mediaId) {
-        const media = medias.find(m => m.id === mediaId);
-        if (!likeStates[mediaId]) {
-            likes++;
-            currentLikes++;
-            likeStates[mediaId] = true;
+        // const currentLikes = likesMap.get(mediaId);
+
+        const currentLikes = mediasFiltered.find(media => media.id === mediaId).likes;
+        console.log(currentLikes)
+        if (currentLike === 1) {
+            let media = mediasFiltered.find(media => media.id === mediaId)
+            console.log(media)
+            media.likes--;
+            currentLike--;
+            //likesMap.set(mediaId, 0);
+            totalLikes--;
         } else {
-            likes--;
-            currentLikes--;
-            likeStates[mediaId] = false;
+
+            let media = mediasFiltered.find(media => media.id === mediaId)
+            console.log(media);
+
+            media.likes++;
+            currentLike++;
+
+            //likesMap.set(mediaId, 1);
+            totalLikes++;
         }
-        console.log(likes);
-        console.log(currentLikes); // Vérification dans la console
+
+        console.log('totalLikes :', totalLikes);
+        updateLikesCounter(totalLikes);
     }
 
-    function getCtaDom() {
-        const ctaSection = document.getElementById("cta");
 
-        const ctaContainer = document.createElement('div');
-        ctaContainer.classList.add("cta-container");
-
-        const ctaIcon = document.createElement("img");
-        ctaIcon.setAttribute('src', '/assets/icons/like.svg');
-        ctaIcon.setAttribute('alt', 'Like icon');
-        ctaIcon.classList.add("cta-icon");
-
-        const ctaLikes = document.createElement('p');
-        ctaLikes.classList.add("cta-likes");
-        // Convertir likeStates en chaîne de caractères
-        ctaLikes.textContent = JSON.stringify(likeStates);
-
-        const ctaPrice = document.createElement('p');
-        ctaPrice.classList.add("cta-price");
-        ctaPrice.textContent = price + `€/jour`;
-
-        ctaSection.appendChild(ctaContainer);
-        ctaContainer.appendChild(ctaPrice);
-        ctaContainer.appendChild(ctaIcon);
-        ctaContainer.appendChild(ctaLikes);
-
-        return ctaSection;
-    }
-    console.log('coucou:', getCtaDom())
 
     function getMediaCardDOM(media) {
-        const { title, image, video, likes } = media;
+        const { id, title, image, video, likes } = media;
 
         const article = document.createElement('article');
         const rowDiv = document.createElement('div');
@@ -68,27 +59,29 @@ function mediaFactory(mediasFiltered) {
         const likeIcon = document.createElement("img");
         likeIcon.setAttribute('src', '/assets/icons/like.svg');
         likeIcon.setAttribute('alt', 'like');
-        likeIcon.classList.add("like");
-        likeIcon.addEventListener('click', likeIconClick);
 
         const h2 = document.createElement('h2');
-        h3 = document.createElement('h3');
-        likeStates = likes;
-        // let liked = false;
-        h2.textContent = title;
-        h3.textContent = likeStates;
+        const h3 = document.createElement('h3');
 
-        /*
+        h2.textContent = title;
+        h3.textContent = likes;
+
+        let liked = media.liked || false;
+
+
         likeIcon.addEventListener('click', () => {
-            if (!liked) {
-                currentLikes++;
-                liked = true;
+            if (currentLike === 1) {
+
+                h3.textContent = media.likes;
+                h3.classList.add('liked');
+
             } else {
-                currentLikes--;
-                liked = false;
+
+                h3.textContent = media.likes;
+                h3.classList.remove('liked');
             }
-            h3.textContent = currentLikes;
-        });*/
+            likeIconClick(id)
+        });
 
         if (image) {
             const img = createImage(media);
@@ -100,22 +93,21 @@ function mediaFactory(mediasFiltered) {
         }
 
         rowDiv.appendChild(h2);
-
         gapDiv.appendChild(h3);
         gapDiv.appendChild(likeIcon);
-
         rowDiv.appendChild(gapDiv);
         article.appendChild(rowDiv);
 
         return article;
     }
 
+
     function createImage(media) {
 
         const img = document.createElement('img');
         img.setAttribute('src', `assets/${media.photographerId}/${media.image}`);
         img.setAttribute('alt', media.title);
-        img.setAttribute('tabindex', '2');
+        img.setAttribute('tabindex', '7');
 
         img.addEventListener('click', () => {
             currentIndex = medias.findIndex(element => element.id === media.id);
@@ -147,7 +139,10 @@ function mediaFactory(mediasFiltered) {
     }
 
     function displaylightBox(media) {
-
+        lightBoxIsOpen = true;
+        const mainPage = document.querySelector('body');
+        mainPage.setAttribute('tabindex', '-1');
+        const allTabIndexElements = document.querySelectorAll('[tabindex]');
         const lightBoxOverlay = document.createElement("div");
         lightBoxOverlay.classList.add("lightBox-overlay");
 
@@ -156,6 +151,7 @@ function mediaFactory(mediasFiltered) {
         const prevImage = document.createElement("img");
         prevImage.setAttribute('src', '/assets/icons/previous.svg');
         prevImage.setAttribute('alt', 'Previous');
+        prevImage.setAttribute('aria-label', 'Previous image');
         prev.appendChild(prevImage);
 
 
@@ -164,14 +160,30 @@ function mediaFactory(mediasFiltered) {
         const nextImage = document.createElement("img");
         nextImage.setAttribute('src', '/assets/icons/next.svg');
         nextImage.setAttribute('alt', 'next');
+        nextImage.setAttribute('aria-label', 'Next image');
         next.appendChild(nextImage);
 
         const closeButton = document.createElement("button");
         closeButton.classList.add("close-btn");
+        closeButton.setAttribute('aria-label', 'Close dialog');
         const closeIcon = document.createElement("img");
         closeIcon.setAttribute('src', '/assets/icons/close-lightbox.svg');
-        closeIcon.setAttribute('alt', 'next');
+        closeIcon.setAttribute('alt', 'close');
         closeButton.appendChild(closeIcon);
+
+
+
+        allTabIndexElements.forEach(element => {
+            element.setAttribute('tabindex', '-1');
+        });
+
+        closeButton.addEventListener('click', () => {
+            mainPage.setAttribute('tabindex', '0');
+
+            allTabIndexElements.forEach(element => {
+                element.setAttribute('tabindex', '0');
+            });
+        });
 
         const lightBoxImage = document.createElement('img');
         const lightBoxTitle = document.createElement('p');
@@ -179,7 +191,6 @@ function mediaFactory(mediasFiltered) {
         const lightBoxVideo = document.createElement('video');
 
         if (media.image) {
-
             lightBoxImage.setAttribute('src', `assets/${media.photographerId}/${media.image}`);
             lightBoxImage.setAttribute('alt', media.title);
         } else if (media.video) {
@@ -188,6 +199,7 @@ function mediaFactory(mediasFiltered) {
         }
 
         const lightBox = document.querySelector('#lightBox-modal');
+        lightBox.setAttribute('aria-label', 'image closeup view');
 
         const mediaContainer = document.createElement('div');
 
@@ -211,15 +223,6 @@ function mediaFactory(mediasFiltered) {
             displaylightBox(prevMedia);
         });
 
-        prev.addEventListener("keydown", function (event) {
-            if (event.key === 'ArrowRight') {
-                currentIndex = (currentIndex - 1 + medias.length) % medias.length;
-                const prevMedia = medias[currentIndex];
-                displaylightBox(prevMedia);
-            }
-        });
-
-
         next.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % medias.length;
             const nextMedia = medias[currentIndex];
@@ -227,20 +230,52 @@ function mediaFactory(mediasFiltered) {
             displaylightBox(nextMedia);
         });
 
-
-        next.addEventListener("keydown", function (event) {
-            if (event.key === 'ArrowLeft') {
-                currentIndex = (currentIndex + 1) % medias.length;
-                const nextMedia = medias[currentIndex];
-                console.log(nextMedia)
-                displaylightBox(nextMedia);
+        document.addEventListener("keydown", (e) => {
+            if (lightBoxIsOpen) {
+                if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % medias.length;
+                    const nextMedia = medias[currentIndex];
+                    displaylightBox(nextMedia);
+                } else if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + medias.length) % medias.length;
+                    const prevMedia = medias[currentIndex];
+                    displaylightBox(prevMedia);
+                }
             }
         });
 
         closeButton.addEventListener('click', () => {
             lightBox.style.display = "none";
+            lightBoxIsOpen = false;
         });
+
     }
 
-    return { getMediaCardDOM, createImage, createVideo, medias, likeIconClick, getCtaDom };
+    const ctaContainer = getCtaDom(totalLikes);
+
+    return { getMediaCardDOM, createImage, createVideo, medias, likeIconClick, ctaContainer };
+}
+
+function getCtaDom(likes) { // ajouter le paramètre likes
+    const ctaContainer = document.querySelector(".cta-container");
+    let ctaIconElement = document.querySelector('.cta-icon');
+    let ctaLikesElement = document.querySelector('.cta-likes');
+
+    if (ctaIconElement && ctaLikesElement) {
+        ctaIconElement.remove();
+        ctaLikesElement.remove();
+    }
+
+    const ctaIcon = document.createElement("img");
+    ctaIcon.setAttribute('src', '/assets/icons/like.svg');
+    ctaIcon.setAttribute('alt', 'Like icon');
+    ctaIcon.classList.add("cta-icon");
+
+    const ctaLikes = document.createElement('p');
+    ctaLikes.classList.add("cta-likes");
+    ctaLikes.textContent = likes; // utiliser le paramètre likes ici
+
+    ctaContainer.appendChild(ctaIcon);
+    ctaContainer.appendChild(ctaLikes);
+    return ctaContainer;
 }

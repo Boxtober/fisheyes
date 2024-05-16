@@ -14,12 +14,14 @@
 <body id="body">
   <main id="main-wrapper" aria-hidden="false">
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html" tabindex="1">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+      </a>
     </header>
 
     <section id="cta"></section>
     <div class="photograph-header">
-      <button tabindex="0" aria-label="Ouvrir la fenêtre de contact" class="contact_button">Contactez-moi</button>
+      <button tabindex="2" aria-label="Contact Me" class="contact_button">Contactez-moi</button>
     </div>
 
 
@@ -28,20 +30,22 @@
     <div class="dropdown" aria-haspopup="listbox" aria-expanded="false" aria-hidden="true">
       <label for="dropdown-trigger">Trier par</label>
 
-      <ul role="listbox" aria-haspopup="listbox" aria-controls="dropdown-options">
+      <ul role="listbox" aria-haspopup="listbox" aria-controls="dropdown-options" aria-labelledby="dropdown-label">
 
-        <img role="button" tabindex="1" src="assets/icons/arrow-filter.svg" id="dropdown-options">
+        <img role="button" tabindex="3" src="assets/icons/arrow-filter.svg" id="dropdown-options"
+          aria-label="open list">
 
-        <li tabindex="2" role="option" aria-selected="true" class="filterByLikes" aria-expanded="false">
+        <li tabindex="4" role="option" aria-selected="true" class="filterByLikes" aria-expanded="false"
+          aria-label="Trier par Popularité">
           Popularité</li>
 
-        <li tabindex="2" role="option" aria-selected="false" class="filterByDate dropdown-content"
-          aria-expanded="false"> <span>
+        <li tabindex="5" role="option" aria-selected="false" class="filterByDate dropdown-content" aria-expanded="false"
+          aria-label="Trier par Date"> <span>
           </span>
           Date</li>
 
-        <li tabindex="2" role="option" aria-selected="false" class="filterByTitle dropdown-content"
-          aria-expanded="false">
+        <li tabindex="6" role="option" aria-selected="false" class="filterByTitle dropdown-content"
+          aria-expanded="false" aria-label="Trier par Titre">
           <span>
           </span> Titre
         </li>
@@ -59,32 +63,31 @@
         <header>
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" class="close-btn" id="close-btn-id" tabindex="0"
-            aria-label="Fermer la fenêtre de contact" />
+            aria-label="Close Contact Form" />
         </header>
         <form method="post">
           <div>
             <label>Prénom</label>
-            <input class="text-control" type="text" id="firstName" name="firstName" minlength="2" />
+            <input class="text-control" type="text" id="firstName" name="firstName" minlength="2"
+              aria-label="First name" />
           </div>
           <div>
             <label for="userName">Nom</label>
-            <input class="text-control" type="text" id="name" name="name" minlength="2" />
+            <input class="text-control" type="text" id="name" name="name" minlength="2" aria-label="Last name" />
           </div>
           <div>
             <label for="email">E-mail</label>
-            <input class="text-control" type="email" id="email" name="email" />
+            <input class="text-control" type="email" id="email" name="email" aria-label="Email" />
           </div>
           <div>
             <label for="message">Votre message</label>
-            <input class="text-control" type="text" id="message" name="message" />
+            <input class="text-control" type="text" id="message" name="message" aria-label="Your message" />
           </div>
           <div class="error-message" data-error=""></div>
-          <button id="submit" type="submit" class="contact_button">Envoyer</button>
+          <button id="submit" type="submit" class="contact_button" aria-label="Send">Envoyer</button>
         </form>
       </div>
     </div>
-
-
 
   </main>
 

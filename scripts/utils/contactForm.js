@@ -1,5 +1,6 @@
 const modalOverlay = document.createElement("div");
 modalOverlay.classList.add("modal-overlay");
+modalOverlay.setAttribute('aria-label', 'Contact me');
 const modal = document.getElementById("contact_modal");
 const form = document.querySelector('form');
 const openModalBtn = document.querySelector('.contact_button');

@@ -1,29 +1,6 @@
 function mediasFactories(medias) {
 
-    let mediasFiltered = medias;
-    // this.mediasFiltered = medias;
-
-    let mediasObject = [];
-    mediasFiltered.forEach((media, index) => {
-        let mediaObj = {
-            date: media.date,
-            id: media.id,
-            image: media.image,
-            video: media.video,
-            likes: media.likes,
-            isLiked: 0,
-            photographerId: media.photographerId,
-            title: media.title,
-            price: media.price
-        };
-
-        // Ajouter l'élément au tableau mediasObject
-        mediasObject.push(mediaObj);
-    });
-
-    console.log('mediasObject', mediasObject);
-
-    console.log('mediasFiltered', mediasFiltered)
+    this.mediasFiltered = medias;
 
     const displayMedias = () => {
         filterByFilter();
@@ -43,11 +20,13 @@ function mediasFactories(medias) {
     const displayGalery = () => {
         const mediasSection = document.querySelector(".medias_section");
         mediasSection.innerHTML = '';
-        const mediaFactoryFiltered = mediaFactory(mediasObject);
+        const mediaFactoryFiltered = mediaFactory(mediasFiltered);
+        mediaFactoryFiltered.getCtaDom();
+        //const mediaFactory = mediaFactory(mediasFiltered);
 
+        //  mediaFactories.getCtaDom();
 
-
-        mediasObject.forEach((media, index) => {
+        mediasFiltered.forEach((media, index) => {
             const mediaCard = mediaFactoryFiltered.getMediaCardDOM(media);
 
             //  mediaCard.setAttribute('tabindex', index + 1);
@@ -87,7 +66,7 @@ function mediasFactories(medias) {
                 dropdownContent.forEach((element) => {
                     element.classList.toggle("active");
                 })
-                mediasObject.sort((a, b) => b.likes - a.likes);
+                mediasFiltered.sort((a, b) => b.likes - a.likes);
                 displayGalery();
             } else if (event.key === 'Escape') {
                 dropdownContent.forEach((element) => {
@@ -97,9 +76,9 @@ function mediasFactories(medias) {
         });
 
         likes.addEventListener("click", function () {
-            mediasObject.sort((a, b) => b.likes - a.likes);
+            mediasFiltered.sort((a, b) => b.likes - a.likes);
             displayGalery();
-            console.log('FILTRE BY LIKES:', mediasObject);
+            console.log('FILTRE BY LIKES:', mediasFiltered);
         })
     }
 
@@ -109,7 +88,7 @@ function mediasFactories(medias) {
 
         dates.addEventListener("keydown", function (event) {
             if (event.key === 'Enter') {
-                mediasObject.sort((a, b) => new Date(b.date) - new Date(a.date));
+                mediasFiltered.sort((a, b) => new Date(b.date) - new Date(a.date));
                 displayGalery();
             } else if (event.key === 'Escape') {
                 dropdownContent.forEach((element) => {
@@ -119,9 +98,9 @@ function mediasFactories(medias) {
         });
 
         dates.addEventListener("click", function () {
-            mediasObject.sort((a, b) => new Date(b.date) - new Date(a.date));
+            mediasFiltered.sort((a, b) => new Date(b.date) - new Date(a.date));
             displayGalery();
-            console.log('FILTRE BY Date:', mediasObject);
+            console.log('FILTRE BY Date:', mediasFiltered);
         })
     }
 
@@ -131,7 +110,7 @@ function mediasFactories(medias) {
 
         title.addEventListener("keydown", function (event) {
             if (event.key === 'Enter') {
-                mediasObject.sort((a, b) => a.title.localeCompare(b.title));
+                mediasFiltered.sort((a, b) => a.title.localeCompare(b.title));
                 displayGalery();
             } else if (event.key === 'Escape') {
                 dropdownContent.forEach((element) => {
@@ -142,9 +121,9 @@ function mediasFactories(medias) {
         });
 
         title.addEventListener("click", function () {
-            mediasObject.sort((a, b) => a.title.localeCompare(b.title));
+            mediasFiltered.sort((a, b) => a.title.localeCompare(b.title));
             displayGalery();
-            console.log('FILTRE BY TITLE:', mediasObject);
+            console.log('FILTRE BY TITLE:', mediasFiltered);
         })
     }
 
