@@ -55,7 +55,7 @@ function mediaFactory(mediasFiltered) {
         const likeIcon = document.createElement("img");
         likeIcon.setAttribute('src', '/assets/icons/like.svg');
         likeIcon.setAttribute('alt', 'like');
-
+        likeIcon.classList.add("cta-icon");
         const h2 = document.createElement('h2');
         const h3 = document.createElement('h3');
 
