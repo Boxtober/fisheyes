@@ -12,11 +12,9 @@ async function initPhotographerPage() {
 
     const photographersSectionId = document.querySelector(".photographer-details-section");
 
-    // const cta = document.getElementById("cta");
-
     const photographerFactories = photographerFactory(photographer);
-    const detailUserCardDOM = photographerFactories.getIdUserCardDOM(photographer);
 
+    const detailUserCardDOM = photographerFactories.getIdUserCardDOM(photographer);
 
     photographersSectionId.appendChild(detailUserCardDOM);
 

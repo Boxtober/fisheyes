@@ -121,8 +121,8 @@ function mediaFactory(mediasFiltered) {
             displaylightBox(media);
         });
 
-        img.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
+        img.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
                 currentIndex = medias.findIndex(element => element.id === media.id);
                 displaylightBox(media);
             }
@@ -150,6 +150,7 @@ function mediaFactory(mediasFiltered) {
         });
         return video;
     }
+
 
     function displaylightBox(media) {
         lightBoxIsOpen = true;
@@ -217,7 +218,7 @@ function mediaFactory(mediasFiltered) {
 
         lightBox.innerHTML = '';
         lightBox.style.display = "flex";
-
+        lightBox.focus();
         lightBox.appendChild(prev);
 
         if (media.image || media.video) {
@@ -233,7 +234,7 @@ function mediaFactory(mediasFiltered) {
             currentIndex = (currentIndex - 1 + medias.length) % medias.length;
             const prevMedia = medias[currentIndex];
             displaylightBox(prevMedia);
-            prev.focus();
+
         });
 
         next.addEventListener('click', () => {
@@ -241,7 +242,6 @@ function mediaFactory(mediasFiltered) {
             const nextMedia = medias[currentIndex];
             //console.log('next :', nextMedia)
             displaylightBox(nextMedia);
-            next.focus();
         });
 
         // lightBox.addEventListener("keydown", (e) => {
@@ -258,19 +258,19 @@ function mediaFactory(mediasFiltered) {
         //         const prevMedia = medias[currentIndex];
         //         displaylightBox(prevMedia);
         //     }
-
         // });
 
-        document.addEventListener("keydown", (event) => {
 
-            if (event.key === 'ArrowRight') {
+        lightBox.addEventListener("keyup", (e) => {
+
+            if (e.key === 'ArrowRight') {
                 currentIndex = (currentIndex + 1) % medias.length;
                 const nextMedia = medias[currentIndex];
                 console.log('next :', nextMedia)
                 displaylightBox(nextMedia);
             }
 
-            if (event.key === 'ArrowLeft') {
+            if (e.key === 'ArrowLeft') {
                 currentIndex = (currentIndex - 1 + medias.length) % medias.length;
                 const prevMedia = medias[currentIndex];
                 displaylightBox(prevMedia);
@@ -278,25 +278,12 @@ function mediaFactory(mediasFiltered) {
 
         });
 
-        // document.addEventListener("keydown", (e) => {
-        //     if (lightBoxIsOpen) {
-        //         if (e.key === 'ArrowRight') {
-        //             currentIndex = (currentIndex + 1) % medias.length;
-        //             const nextMedia = medias[currentIndex];
-        //             displaylightBox(nextMedia);
-        //         } else if (e.key === 'ArrowLeft') {
-        //             currentIndex = (currentIndex - 1 + medias.length) % medias.length;
-        //             const prevMedia = medias[currentIndex];
-        //             displaylightBox(prevMedia);
-        //         }
-        //     }
-        // });
-
         closeButton.addEventListener('click', () => {
             lightBox.style.display = "none";
             lightBoxIsOpen = false;
         });
 
+        next.focus();
     }
 
     const ctaContainer = getCtaDom(totalLikes);
@@ -304,7 +291,7 @@ function mediaFactory(mediasFiltered) {
     return { getMediaCardDOM, createImage, createVideo, medias, likeIconClick, ctaContainer };
 }
 
-function getCtaDom(likes) { // ajouter le paramètre likes
+function getCtaDom(likes) {
     const ctaContainer = document.querySelector(".cta-container");
     let ctaIconElement = document.querySelector('.cta-icon');
     let ctaLikesElement = document.querySelector('.cta-likes');
@@ -314,22 +301,10 @@ function getCtaDom(likes) { // ajouter le paramètre likes
         ctaLikesElement.remove();
     }
 
-    // const rowDiv = document.createElement("div");
-    // rowDiv.classList.add("row");
-
     const ctaIcon = document.createElement("img");
     ctaIcon.setAttribute('src', '/assets/icons/like.svg');
     ctaIcon.setAttribute('alt', 'Like icon');
     ctaIcon.classList.add("cta-icon");
-
-    // const ctaLikes = document.createElement('p');
-    // ctaLikes.classList.add("cta-likes");
-    // ctaLikes.textContent = likes;
-    // rowDiv.appendChild(ctaLikes);
-    // rowDiv.appendChild(ctaIcon);
-
-    // ctaContainer.appendChild(rowDiv);
-    // return ctaContainer;
 
     const ctaLikes = document.createElement('p');
     ctaLikes.classList.add("cta-likes");
