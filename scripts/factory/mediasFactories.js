@@ -45,8 +45,6 @@ function mediasFactories(medias) {
         mediasSection.innerHTML = '';
         const mediaFactoryFiltered = mediaFactory(mediasObject);
 
-
-
         mediasObject.forEach((media, index) => {
             const mediaCard = mediaFactoryFiltered.getMediaCardDOM(media);
 

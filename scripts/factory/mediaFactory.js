@@ -76,10 +76,8 @@ function mediaFactory(mediasFiltered) {
 
             media.likes = likes;
             media.isLiked = isLiked;
-
             h3.textContent = likes;
             updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked'
-
             updateLikesCounter(totalLikes);
         });
 
@@ -136,13 +134,19 @@ function mediaFactory(mediasFiltered) {
 
     function createVideo(media) {
         const video = document.createElement('video');
-
         video.setAttribute('src', `assets/${media.photographerId}/${media.video}`);
         video.setAttribute('alt', media.title);
 
         video.addEventListener('click', () => {
             currentIndex = medias.findIndex(element => element.id === media.id);
             displaylightBox(media);
+        });
+
+        video.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                currentIndex = medias.findIndex(element => element.id === media.id);
+                displaylightBox(media);
+            }
         });
         return video;
     }
@@ -180,8 +184,6 @@ function mediaFactory(mediasFiltered) {
         closeIcon.setAttribute('alt', 'close');
         closeButton.appendChild(closeIcon);
 
-
-
         allTabIndexElements.forEach(element => {
             element.setAttribute('tabindex', '-1');
         });
@@ -205,6 +207,7 @@ function mediaFactory(mediasFiltered) {
         } else if (media.video) {
             lightBoxVideo.setAttribute('src', `assets/${media.photographerId}/${media.video}`);
             lightBoxVideo.setAttribute('alt', media.title);
+            lightBoxVideo.setAttribute('controls', '');
         }
 
         const lightBox = document.querySelector('#lightBox-modal');
@@ -230,28 +233,64 @@ function mediaFactory(mediasFiltered) {
             currentIndex = (currentIndex - 1 + medias.length) % medias.length;
             const prevMedia = medias[currentIndex];
             displaylightBox(prevMedia);
+            prev.focus();
         });
 
         next.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % medias.length;
             const nextMedia = medias[currentIndex];
-            console.log(nextMedia)
+            //console.log('next :', nextMedia)
             displaylightBox(nextMedia);
+            next.focus();
         });
 
-        document.addEventListener("keydown", (e) => {
-            if (lightBoxIsOpen) {
-                if (e.key === 'ArrowRight') {
-                    currentIndex = (currentIndex + 1) % medias.length;
-                    const nextMedia = medias[currentIndex];
-                    displaylightBox(nextMedia);
-                } else if (e.key === 'ArrowLeft') {
-                    currentIndex = (currentIndex - 1 + medias.length) % medias.length;
-                    const prevMedia = medias[currentIndex];
-                    displaylightBox(prevMedia);
-                }
+        // lightBox.addEventListener("keydown", (e) => {
+
+        //     if (e.key === 'ArrowRight') {
+        //         currentIndex = (currentIndex + 1) % medias.length;
+        //         const nextMedia = medias[currentIndex];
+        //         console.log('next :', nextMedia)
+        //         displaylightBox(nextMedia);
+        //     }
+
+        //     if (e.key === 'ArrowLeft') {
+        //         currentIndex = (currentIndex - 1 + medias.length) % medias.length;
+        //         const prevMedia = medias[currentIndex];
+        //         displaylightBox(prevMedia);
+        //     }
+
+        // });
+
+        document.addEventListener("keydown", (event) => {
+
+            if (event.key === 'ArrowRight') {
+                currentIndex = (currentIndex + 1) % medias.length;
+                const nextMedia = medias[currentIndex];
+                console.log('next :', nextMedia)
+                displaylightBox(nextMedia);
             }
+
+            if (event.key === 'ArrowLeft') {
+                currentIndex = (currentIndex - 1 + medias.length) % medias.length;
+                const prevMedia = medias[currentIndex];
+                displaylightBox(prevMedia);
+            }
+
         });
+
+        // document.addEventListener("keydown", (e) => {
+        //     if (lightBoxIsOpen) {
+        //         if (e.key === 'ArrowRight') {
+        //             currentIndex = (currentIndex + 1) % medias.length;
+        //             const nextMedia = medias[currentIndex];
+        //             displaylightBox(nextMedia);
+        //         } else if (e.key === 'ArrowLeft') {
+        //             currentIndex = (currentIndex - 1 + medias.length) % medias.length;
+        //             const prevMedia = medias[currentIndex];
+        //             displaylightBox(prevMedia);
+        //         }
+        //     }
+        // });
 
         closeButton.addEventListener('click', () => {
             lightBox.style.display = "none";
@@ -275,24 +314,28 @@ function getCtaDom(likes) { // ajouter le paramètre likes
         ctaLikesElement.remove();
     }
 
-    const rowDiv = document.createElement("div");
-    rowDiv.classList.add("row");
+    // const rowDiv = document.createElement("div");
+    // rowDiv.classList.add("row");
 
     const ctaIcon = document.createElement("img");
     ctaIcon.setAttribute('src', '/assets/icons/like.svg');
     ctaIcon.setAttribute('alt', 'Like icon');
     ctaIcon.classList.add("cta-icon");
 
+    // const ctaLikes = document.createElement('p');
+    // ctaLikes.classList.add("cta-likes");
+    // ctaLikes.textContent = likes;
+    // rowDiv.appendChild(ctaLikes);
+    // rowDiv.appendChild(ctaIcon);
+
+    // ctaContainer.appendChild(rowDiv);
+    // return ctaContainer;
+
     const ctaLikes = document.createElement('p');
     ctaLikes.classList.add("cta-likes");
     ctaLikes.textContent = likes;
-    rowDiv.appendChild(ctaLikes);
-    rowDiv.appendChild(ctaIcon);
-
-
-
-    ctaContainer.appendChild(rowDiv);
+    ctaContainer.appendChild(ctaIcon);
+    ctaContainer.appendChild(ctaLikes);
     return ctaContainer;
-
 
 }

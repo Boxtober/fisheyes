@@ -75,7 +75,8 @@
       height: 300px;
       width: 350px;
       object-fit: cover;
-      border-radius: 5px; }
+      border-radius: 5px;
+      cursor: pointer; }
     .medias_section article .gap .cta-icon {
       width: 17.5px;
       height: auto; }
@@ -107,20 +108,21 @@
   padding: 25px;
   background: var(--orange);
   border-radius: 5px 5px 0 0;
-  margin-right: 6rem; }
+  margin-right: 3rem;
+  max-width: 320px;
+  min-width: 320px; }
   #cta .cta-container {
     display: flex;
     flex-direction: row-reverse;
-    gap: 4rem;
+    /* gap: 1rem; */
     font-size: 24px;
-    font-weight: 500; }
-    #cta .cta-container .row {
-      display: flex;
-      flex-direction: row;
-      gap: .5rem;
-      color: var(--black); }
-      #cta .cta-container .row img {
-        filter: brightness(0); }
+    font-weight: 500;
+    justify-content: space-between;
+    width: 100%; }
+    #cta .cta-container img {
+      filter: brightness(0); }
+    #cta .cta-container .cta-price {
+      margin-left: 130px; }
 
 .medias_section > article > div > div > .liked {
   color: green;

@@ -56,7 +56,7 @@ function photographerFactory(photographer) {
         const div = document.createElement('div');
         const img = document.createElement('img');
         img.setAttribute("src", picture);
-
+        img.setAttribute('alt', `${name}`);
         const h2 = document.createElement('h2');
         h2.textContent = name;
 

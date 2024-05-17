@@ -102,6 +102,7 @@
             width: 350px;
             object-fit: cover;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         .gap {
@@ -149,25 +150,39 @@
     padding: 25px;
     background: var(--orange);
     border-radius: 5px 5px 0 0;
-    margin-right: 6rem;
+    margin-right: 3rem;
+    max-width: 320px;
+    min-width: 320px;
+
 
     .cta-container {
         display: flex;
         flex-direction: row-reverse;
-        gap: 4rem;
+        /* gap: 1rem; */
         font-size: 24px;
         font-weight: 500;
+        justify-content: space-between;
+        width: 100%;
 
-        .row {
-            display: flex;
-            flex-direction: row;
-            gap: .5rem;
-            color: var(--black);
-            ;
+        //
+        // .row {
+        //     display: flex;
+        //     flex-direction: row;
+        //     gap: .5rem;
+        //     color: var(--black);
+        //     ;
 
-            img {
-                filter: brightness(0);
-            }
+        //     img {
+        //         filter: brightness(0);
+        //     }
+        // }
+
+        img {
+            filter: brightness(0);
+        }
+
+        .cta-price {
+            margin-left: 130px;
         }
     }
 }

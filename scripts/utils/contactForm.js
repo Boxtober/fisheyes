@@ -204,8 +204,6 @@ function checkEmail() {
         return true;
     }
 }
-
-
 function checkMessage() {
     const messageInput = document.getElementById("message");
     const messageValue = messageInput.value.trim();
