@@ -3,7 +3,7 @@ function photographerFactory(photographer) {
 
     function getUserCardDOM() {
 
-        const picture = `/assets/Photographers-ID-Photos/${portrait}`;
+        const picture = `assets/Photographers-ID-Photos/${portrait}`;
 
         const link = document.createElement('a');
         link.setAttribute('href', `photographer.html?id=${id}`);
@@ -48,7 +48,7 @@ function photographerFactory(photographer) {
             return null;
         }
 
-        const picture = `/assets/Photographers-ID-Photos/${portrait}`;
+        const picture = `assets/Photographers-ID-Photos/${portrait}`;
 
         const displayDataByIdSection = document.querySelector(".photograph-header");
 

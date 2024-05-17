@@ -53,7 +53,7 @@ function mediaFactory(mediasFiltered) {
         gapDiv.classList.add("gap");
 
         const likeIcon = document.createElement("img");
-        likeIcon.setAttribute('src', '/assets/icons/like.svg');
+        likeIcon.setAttribute('src', 'assets/icons/like.svg');
         likeIcon.setAttribute('alt', 'like');
         likeIcon.classList.add("cta-icon");
         const h2 = document.createElement('h2');
@@ -122,6 +122,7 @@ function mediaFactory(mediasFiltered) {
         });
 
         img.addEventListener('keydown', (e) => {
+            e.stopImmediatePropagation();
             if (e.key === 'Enter') {
                 currentIndex = medias.findIndex(element => element.id === media.id);
                 displaylightBox(media);
@@ -163,7 +164,7 @@ function mediaFactory(mediasFiltered) {
         const prev = document.createElement("button");
         prev.classList.add("prev-btn");
         const prevImage = document.createElement("img");
-        prevImage.setAttribute('src', '/assets/icons/previous.svg');
+        prevImage.setAttribute('src', 'assets/icons/previous.svg');
         prevImage.setAttribute('alt', 'Previous');
         prevImage.setAttribute('aria-label', 'Previous image');
         prev.appendChild(prevImage);
@@ -172,7 +173,7 @@ function mediaFactory(mediasFiltered) {
         const next = document.createElement("button");
         next.classList.add("next-btn");
         const nextImage = document.createElement("img");
-        nextImage.setAttribute('src', '/assets/icons/next.svg');
+        nextImage.setAttribute('src', 'assets/icons/next.svg');
         nextImage.setAttribute('alt', 'next');
         nextImage.setAttribute('aria-label', 'Next image');
         next.appendChild(nextImage);
@@ -181,7 +182,7 @@ function mediaFactory(mediasFiltered) {
         closeButton.classList.add("close-btn");
         closeButton.setAttribute('aria-label', 'Close dialog');
         const closeIcon = document.createElement("img");
-        closeIcon.setAttribute('src', '/assets/icons/close-lightbox.svg');
+        closeIcon.setAttribute('src', 'assets/icons/close-lightbox.svg');
         closeIcon.setAttribute('alt', 'close');
         closeButton.appendChild(closeIcon);
 
@@ -244,25 +245,9 @@ function mediaFactory(mediasFiltered) {
             displaylightBox(nextMedia);
         });
 
-        // lightBox.addEventListener("keydown", (e) => {
 
-        //     if (e.key === 'ArrowRight') {
-        //         currentIndex = (currentIndex + 1) % medias.length;
-        //         const nextMedia = medias[currentIndex];
-        //         console.log('next :', nextMedia)
-        //         displaylightBox(nextMedia);
-        //     }
-
-        //     if (e.key === 'ArrowLeft') {
-        //         currentIndex = (currentIndex - 1 + medias.length) % medias.length;
-        //         const prevMedia = medias[currentIndex];
-        //         displaylightBox(prevMedia);
-        //     }
-        // });
-
-
-        lightBox.addEventListener("keyup", (e) => {
-
+        document.addEventListener("keyup", (e) => {
+            e.stopImmediatePropagation();
             if (e.key === 'ArrowRight') {
                 currentIndex = (currentIndex + 1) % medias.length;
                 const nextMedia = medias[currentIndex];
@@ -270,7 +255,7 @@ function mediaFactory(mediasFiltered) {
                 displaylightBox(nextMedia);
             }
 
-            if (e.key === 'ArrowLeft') {
+            else if (e.key === 'ArrowLeft') {
                 currentIndex = (currentIndex - 1 + medias.length) % medias.length;
                 const prevMedia = medias[currentIndex];
                 displaylightBox(prevMedia);
@@ -287,7 +272,6 @@ function mediaFactory(mediasFiltered) {
     }
 
     const ctaContainer = getCtaDom(totalLikes);
-
     return { getMediaCardDOM, createImage, createVideo, medias, likeIconClick, ctaContainer };
 }
 
@@ -302,7 +286,7 @@ function getCtaDom(likes) {
     }
 
     const ctaIcon = document.createElement("img");
-    ctaIcon.setAttribute('src', '/assets/icons/like.svg');
+    ctaIcon.setAttribute('src', 'assets/icons/like.svg');
     ctaIcon.setAttribute('alt', 'Like icon');
     ctaIcon.classList.add("cta-icon");
 
