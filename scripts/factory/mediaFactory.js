@@ -10,24 +10,15 @@ function mediaFactory(mediasFiltered) {
         }
     }
 
-    function likeIconClick(mediaId, isLiked, likes) {
+    function likeIconClick(isLiked) {
 
         if (isLiked === 1) {
-            let media = mediasFiltered.find(media => media.id === mediaId)
-            likes--;
-            isLiked--;
             totalLikes--;
         } else {
-            let media = mediasFiltered.find(media => media.id === mediaId)
-            likes++;
-            isLiked++;
             totalLikes++;
         }
-
         updateLikesCounter(totalLikes);
     }
-
-
 
     function getMediaCardDOM(media) {
         let { title, image, video, likes, isLiked } = media;
@@ -141,13 +132,10 @@ function mediaFactory(mediasFiltered) {
 
 
     function displaylightBox(media) {
-        lightBoxIsOpen = true;
+
         const mainPage = document.querySelector('body');
         mainPage.setAttribute('tabindex', '-1');
         const allTabIndexElements = document.querySelectorAll('[tabindex]');
-        const lightBoxOverlay = document.createElement("div");
-        lightBoxOverlay.classList.add("lightBox-overlay");
-
         const prev = document.createElement("button");
         prev.classList.add("prev-btn");
         const prevImage = document.createElement("img");
@@ -251,7 +239,6 @@ function mediaFactory(mediasFiltered) {
 
         closeButton.addEventListener('click', () => {
             lightBox.style.display = "none";
-            lightBoxIsOpen = false;
         });
 
         next.focus();
