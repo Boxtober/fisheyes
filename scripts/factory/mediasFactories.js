@@ -1,10 +1,9 @@
 function mediasFactories(medias) {
 
     let mediasFiltered = medias;
-    // this.mediasFiltered = medias;
 
     let mediasObject = [];
-    mediasFiltered.forEach((media, index) => {
+    mediasFiltered.forEach((media) => {
         let mediaObj = {
             date: media.date,
             id: media.id,
@@ -17,13 +16,9 @@ function mediasFactories(medias) {
             price: media.price
         };
 
-        // Ajouter l'élément au tableau mediasObject
+        // Ajouter element au tableau mediasObject
         mediasObject.push(mediaObj);
     });
-
-    console.log('mediasObject', mediasObject);
-
-    console.log('mediasFiltered', mediasFiltered)
 
     const displayMedias = () => {
         filterByFilter();
@@ -47,7 +42,6 @@ function mediasFactories(medias) {
 
         mediasObject.forEach((media, index) => {
             const mediaCard = mediaFactoryFiltered.getMediaCardDOM(media);
-
             mediaCard.setAttribute('aria-label', `Media ${index + 1}: ${media.title}`);
             mediasSection.appendChild(mediaCard);
 
@@ -60,9 +54,8 @@ function mediasFactories(medias) {
         dropdownOptions.addEventListener("click", function () {
             dropdownContent.forEach((element) => {
                 element.classList.toggle("active");
-                console.log(element)
+
             })
-            console.log('clic')
         });
 
         dropdownOptions.addEventListener("keydown", function (event) {
@@ -96,7 +89,6 @@ function mediasFactories(medias) {
         likes.addEventListener("click", function () {
             mediasObject.sort((a, b) => b.likes - a.likes);
             displayGalery();
-            console.log('FILTRE BY LIKES:', mediasObject);
         })
     }
 
@@ -118,7 +110,6 @@ function mediasFactories(medias) {
         dates.addEventListener("click", function () {
             mediasObject.sort((a, b) => new Date(b.date) - new Date(a.date));
             displayGalery();
-            console.log('FILTRE BY Date:', mediasObject);
         })
     }
 
@@ -133,7 +124,6 @@ function mediasFactories(medias) {
             } else if (event.key === 'Escape') {
                 dropdownContent.forEach((element) => {
                     element.classList.remove("active");
-                    console.log('echap')
                 });
             }
         });

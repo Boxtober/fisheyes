@@ -1,11 +1,5 @@
 function mediaFactory(mediasFiltered) {
-    console.log('mediasFiltered',);
-    //const likesMap = new Map(mediasFiltered.map(media => [media.id, media.likes]));
-
-
-    // let currentLike = 0;
     let totalLikes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
-    console.log(totalLikes);
     const medias = mediasFiltered;
     let currentIndex = 0;
 
@@ -18,32 +12,25 @@ function mediaFactory(mediasFiltered) {
 
     function likeIconClick(mediaId, isLiked, likes) {
 
-        // const currentLikes = mediasFiltered.find(media => media.id === mediaId).likes;
-        // console.log(currentLikes)
         if (isLiked === 1) {
             let media = mediasFiltered.find(media => media.id === mediaId)
-            console.log(media)
             likes--;
             isLiked--;
             totalLikes--;
         } else {
-
             let media = mediasFiltered.find(media => media.id === mediaId)
-            console.log(media);
-
             likes++;
             isLiked++;
             totalLikes++;
         }
 
-        console.log('totalLikes :', totalLikes);
         updateLikesCounter(totalLikes);
     }
 
 
 
     function getMediaCardDOM(media) {
-        let { id, title, image, video, likes, isLiked } = media;
+        let { title, image, video, likes, isLiked } = media;
 
         const article = document.createElement('article');
         const rowDiv = document.createElement('div');
@@ -241,7 +228,6 @@ function mediaFactory(mediasFiltered) {
         next.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % medias.length;
             const nextMedia = medias[currentIndex];
-            //console.log('next :', nextMedia)
             displaylightBox(nextMedia);
         });
 
@@ -296,5 +282,4 @@ function getCtaDom(likes) {
     ctaContainer.appendChild(ctaIcon);
     ctaContainer.appendChild(ctaLikes);
     return ctaContainer;
-
 }

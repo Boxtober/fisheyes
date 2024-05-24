@@ -87,10 +87,7 @@ form.addEventListener("submit", (e) => {
         console.log("Message : ", message);
         form.reset();
     }
-
 });
-
-
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();

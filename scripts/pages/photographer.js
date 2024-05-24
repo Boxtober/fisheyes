@@ -22,7 +22,7 @@ async function initPhotographerPage() {
 
     const mediasFacto = mediasFactories(medias);
     mediasFacto.displayMedias();
-    console.log('mediasFacto', mediasFacto);
+
 }
 
 initPhotographerPage();

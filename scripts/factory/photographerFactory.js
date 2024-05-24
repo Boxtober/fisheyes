@@ -30,7 +30,6 @@ function photographerFactory(photographer) {
 
         link.appendChild(img);
         link.appendChild(h2);
-
         article.appendChild(link);
         article.appendChild(userCity);
         article.appendChild(userTagline);
@@ -38,8 +37,6 @@ function photographerFactory(photographer) {
 
         return article;
     }
-
-
 
     function getIdUserCardDOM() {
 
