@@ -1,3 +1,4 @@
+// eslint-disable-next-line 
 function mediasFactories(medias) {
 
     let mediasFiltered = medias;
@@ -36,6 +37,7 @@ function mediasFactories(medias) {
 
     const displayGalery = () => {
         const mediasSection = document.querySelector(".medias_section");
+        // eslint-disable-next-line 
         mediasSection.innerHTML = '';
         const mediaFactoryFiltered = mediaFactory(mediasObject);
 

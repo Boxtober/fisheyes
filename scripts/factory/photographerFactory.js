@@ -1,3 +1,4 @@
+// eslint-disable-next-line 
 function photographerFactory(photographer) {
     const { id, name, city, tagline, country, portrait, price } = photographer;
 
