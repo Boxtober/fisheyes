@@ -9,7 +9,6 @@ async function init() {
         photographersSection.appendChild(photographerCard);
 
     });
-
 }
 
 init();

@@ -15,7 +15,6 @@ function mediasFactories(medias) {
             title: media.title,
             price: media.price
         };
-
         // Ajouter element au tableau mediasObject
         mediasObject.push(mediaObj);
     });
@@ -44,13 +43,10 @@ function mediasFactories(medias) {
             const mediaCard = mediaFactoryFiltered.getMediaCardDOM(media);
             mediaCard.setAttribute('aria-label', `Media ${index + 1}: ${media.title}`);
             mediasSection.appendChild(mediaCard);
-
         });
-
     }
 
     function filterByLikes() {
-
         dropdownOptions.addEventListener("click", function () {
             dropdownContent.forEach((element) => {
                 element.classList.toggle("active");
@@ -115,7 +111,6 @@ function mediasFactories(medias) {
 
     function filterByTitle() {
         const title = document.querySelector(".filterByTitle")
-
 
         title.addEventListener("keydown", function (event) {
             if (event.key === 'Enter') {

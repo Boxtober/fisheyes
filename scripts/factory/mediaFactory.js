@@ -1,3 +1,4 @@
+// eslint-disable-next-line 
 function mediaFactory(mediasFiltered) {
     let totalLikes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
     const medias = mediasFiltered;
@@ -34,6 +35,8 @@ function mediaFactory(mediasFiltered) {
         likeIcon.setAttribute('src', 'assets/icons/like.svg');
         likeIcon.setAttribute('alt', 'like');
         likeIcon.classList.add("cta-icon");
+        likeIcon.setAttribute('tabindex', '0');
+
         const h2 = document.createElement('h2');
         const h3 = document.createElement('h3');
 
@@ -41,7 +44,35 @@ function mediaFactory(mediasFiltered) {
         h3.textContent = likes;
         updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked' une seule fois
 
+        // likeIcon.addEventListener('click', () => {
+        //     if (isLiked === 1) {
+        //         likes--;
+        //         isLiked--;
+        //         totalLikes--;
+        //     } else {
+        //         likes++;
+        //         isLiked++;
+        //         totalLikes++;
+        //     }
+
+        //     media.likes = likes;
+        //     media.isLiked = isLiked;
+        //     h3.textContent = likes;
+        //     updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked'
+        //     updateLikesCounter(totalLikes);
+        // });
+
         likeIcon.addEventListener('click', () => {
+            toggleLike();
+        });
+
+        likeIcon.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                toggleLike();
+            }
+        });
+
+        function toggleLike() {
             if (isLiked === 1) {
                 likes--;
                 isLiked--;
@@ -57,7 +88,7 @@ function mediaFactory(mediasFiltered) {
             h3.textContent = likes;
             updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked'
             updateLikesCounter(totalLikes);
-        });
+        }
 
         if (image) {
             const img = createImage(media);
@@ -115,6 +146,7 @@ function mediaFactory(mediasFiltered) {
         const video = document.createElement('video');
         video.setAttribute('src', `assets/${media.photographerId}/${media.video}`);
         video.setAttribute('alt', media.title);
+        video.setAttribute('tabindex', '7');
 
         video.addEventListener('click', () => {
             currentIndex = medias.findIndex(element => element.id === media.id);
@@ -134,33 +166,37 @@ function mediaFactory(mediasFiltered) {
     function displaylightBox(media) {
 
         const mainPage = document.querySelector('body');
-        mainPage.setAttribute('tabindex', '-1');
+        mainPage.setAttribute('tabindex', '0');
         const allTabIndexElements = document.querySelectorAll('[tabindex]');
+
+
         const prev = document.createElement("button");
         prev.classList.add("prev-btn");
         const prevImage = document.createElement("img");
         prevImage.setAttribute('src', 'assets/icons/previous.svg');
         prevImage.setAttribute('alt', 'Previous');
-        prevImage.setAttribute('aria-label', 'Previous image');
+        prevImage.setAttribute('aria-label', 'Image précedante');
         prev.appendChild(prevImage);
 
 
         const next = document.createElement("button");
         next.classList.add("next-btn");
+        next.setAttribute('aria-label', 'Image suivante');
         const nextImage = document.createElement("img");
         nextImage.setAttribute('src', 'assets/icons/next.svg');
         nextImage.setAttribute('alt', 'next');
-        nextImage.setAttribute('aria-label', 'Next image');
+
         next.appendChild(nextImage);
 
         const closeButton = document.createElement("button");
         closeButton.classList.add("close-btn");
-        closeButton.setAttribute('aria-label', 'Close dialog');
+        closeButton.setAttribute('aria-label', 'Fermer la galerie');
         const closeIcon = document.createElement("img");
         closeIcon.setAttribute('src', 'assets/icons/close-lightbox.svg');
         closeIcon.setAttribute('alt', 'close');
         closeButton.appendChild(closeIcon);
 
+        closeButton.focus();
         allTabIndexElements.forEach(element => {
             element.setAttribute('tabindex', '-1');
         });
@@ -188,7 +224,7 @@ function mediaFactory(mediasFiltered) {
         }
 
         const lightBox = document.querySelector('#lightBox-modal');
-        lightBox.setAttribute('aria-label', 'image closeup view');
+        // lightBox.setAttribute('aria-label', 'galerie de media');
 
         const mediaContainer = document.createElement('div');
 
@@ -241,7 +277,7 @@ function mediaFactory(mediasFiltered) {
             lightBox.style.display = "none";
         });
 
-        next.focus();
+        //next.focus();
     }
 
     const ctaContainer = getCtaDom(totalLikes);

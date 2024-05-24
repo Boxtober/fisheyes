@@ -21,7 +21,7 @@
             margin-top: 5px;
             cursor: pointer;
             padding: 16px;
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease;
         }
 
         #dropdown-options:hover {
@@ -71,7 +71,16 @@
             display: block;
             visibility: visible;
             opacity: 1;
+            top: -3px;
         }
-
     }
+}
+
+
+#main-wrapper>div.dropdown>ul>li.filterByTitle.dropdown-content.active {
+    border-radius: 0 0 5px 5px;
+}
+
+#main-wrapper>div.dropdown>ul>li.filterByLikes {
+    border-radius: 5px;
 }

@@ -15,26 +15,25 @@
   <main id="main-wrapper" aria-hidden="false">
     <header>
       <a href="index.html" tabindex="1">
-        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+        <img src="assets/images/logo.png" class="logo" alt="Retourner à l'accueil" />
       </a>
     </header>
 
     <section id="cta"></section>
     <div class="photograph-header">
-      <button tabindex="2" aria-label="Contact Me" class="contact_button">Contactez-moi</button>
+      <button tabindex="2" aria-label="Contactez-moi" class="contact_button">Contactez-moi</button>
     </div>
 
 
     <div class="photographer-details-section"></div>
 
-    <div class="dropdown" aria-haspopup="listbox" aria-expanded="false" aria-hidden="true" role="button">
+    <div class="dropdown" aria-haspopup="listbox" aria-expanded="false" role="button">
       <label for="dropdown-trigger">Trier par</label>
 
-      <ul role="listbox" aria-haspopup="listbox" aria-controls="dropdown-options" aria-labelledby="dropdown-label"
-        aria-label="Button filter by">
+      <ul role="listbox" aria-haspopup="listbox" aria-controls="dropdown-options" aria-labelledby="dropdown-label">
 
-        <img role="button" tabindex="3" src="assets/icons/arrow-filter.svg" id="dropdown-options" aria-label="open list"
-          alt="filter button">
+        <img role="button" tabindex="3" src="assets/icons/arrow-filter.svg" id="dropdown-options"
+          aria-label="afficher les filtres" alt="filter button" aria-label="Button filter by">
 
         <li tabindex="4" role="option" aria-selected="true" class="filterByLikes" aria-expanded="false"
           aria-label="Trier par Popularité">
@@ -51,11 +50,10 @@
           <span></span>
           Titre
         </li>
-
       </ul>
     </div>
 
-    <div id="lightBox-modal" aria-hidden="true" role="dialog" aria-describedby="lightboxTitle">
+    <div id="lightBox-modal" role="dialog" aria-describedby="lightboxTitle">
       <div class="lightBox-content"></div>
     </div>
     <article class="medias_section"></article>
@@ -64,19 +62,18 @@
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" class="close-btn" id="close-btn-id" tabindex="0"
-            aria-label="Close Contact Form" alt="Close button" />
+          <img src="assets/icons/close.svg" class="close-btn" id="close-btn-id" tabindex="0" aria-label="Bouton fermer"
+            alt="Close button" />
         </header>
         <form method="post">
           <div>
             <label for="firstName">Prénom</label>
-            <input class="text-control" type="text" id="firstName" name="firstName" minlength="2"
-              aria-label="First name" />
+            <input class="text-control" type="text" id="firstName" name="firstName" minlength="2" aria-label="Prénom" />
           </div>
 
           <div>
             <label for="name">Nom</label>
-            <input class="text-control" type="text" id="name" name="name" minlength="2" aria-label="Last name" />
+            <input class="text-control" type="text" id="name" name="name" minlength="2" aria-label="Nom" />
           </div>
 
           <div>
@@ -85,10 +82,10 @@
           </div>
           <div>
             <label for="message">Votre message</label>
-            <input class="text-control" type="text" id="message" name="message" aria-label="Your message" />
+            <input class="text-control" type="text" id="message" name="message" aria-label="Votre message" />
           </div>
           <div class="error-message" data-error=""></div>
-          <button id="submit" type="submit" class="contact_button" aria-label="Send">Envoyer</button>
+          <button id="submit" type="submit" class="contact_button" aria-label="Envoyer  ">Envoyer</button>
         </form>
       </div>
     </div>
