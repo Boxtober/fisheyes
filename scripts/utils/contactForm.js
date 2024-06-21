@@ -127,7 +127,7 @@ function checkFirstname() {
     const firstNameValue = firstName.value.trim();
     let parentElement = firstName.parentNode;
 
-    const validCharacters = /^[a-zA-ZÀ-ÖØ-öø-ÿ\-]+$/;
+    const validCharacters = /^[a-zA-ZÀ-ÖØ-öø-ÿ-]+$/;
 
     const errorMessageElement = createErrorMessage(parentElement, '.error-message');
 
@@ -155,7 +155,7 @@ function checkUserName() {
     const userNameValue = userName.value.trim();
     let parentElement = userName.parentNode;
 
-    const validCharacters = /^[a-zA-ZÀ-ÖØ-öø-ÿ\-]+$/;
+    const validCharacters = /^[a-zA-ZÀ-ÖØ-öø-ÿ-]+$/;
 
     const errorMessageElement = createErrorMessage(parentElement, '.error-message');
 
@@ -182,8 +182,7 @@ function checkEmail() {
     const emailInput = document.getElementById("email");
     const emailValue = emailInput.value.trim();
     let parentElement = emailInput.parentNode;
-
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const errorMessageElement = createErrorMessage(parentElement, '.error-message');
 

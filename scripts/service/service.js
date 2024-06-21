@@ -1,4 +1,4 @@
-async function getPhotographers() {
+async function getPhotographers() { // eslint-disable-line no-unused-vars
     try {
         const response = await fetch('data/photographers.json');
         if (!response.ok) {
@@ -26,7 +26,7 @@ async function getPhotographers() {
         };
     }
 }
-
+// eslint-disable-next-line 
 async function getMediasByPhotographerId(photographerId) {
     try {
         const response = await fetch('data/photographers.json');

@@ -30,6 +30,7 @@ function mediasFactories(medias) {
         filterByDate();
         filterByTitle();
     }
+
     let dropdownOptions = document.getElementById("dropdown-options");
     let dropdownContent = document.querySelectorAll(".dropdown-content");
 
@@ -37,8 +38,8 @@ function mediasFactories(medias) {
 
     const displayGalery = () => {
         const mediasSection = document.querySelector(".medias_section");
-        // eslint-disable-next-line 
         mediasSection.innerHTML = '';
+        // eslint-disable-next-line 
         const mediaFactoryFiltered = mediaFactory(mediasObject);
 
         mediasObject.forEach((media, index) => {

@@ -1,5 +1,7 @@
 // eslint-disable-next-line 
 function mediaFactory(mediasFiltered) {
+    console.log('mediasFiltered', mediasFiltered)
+    console.log('mediasFiltered', mediasFiltered)
     let totalLikes = mediasFiltered.reduce((total, { likes }) => total + likes, 0);
     const medias = mediasFiltered;
     let currentIndex = 0;
@@ -43,24 +45,6 @@ function mediaFactory(mediasFiltered) {
         h2.textContent = title;
         h3.textContent = likes;
         updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked' une seule fois
-
-        // likeIcon.addEventListener('click', () => {
-        //     if (isLiked === 1) {
-        //         likes--;
-        //         isLiked--;
-        //         totalLikes--;
-        //     } else {
-        //         likes++;
-        //         isLiked++;
-        //         totalLikes++;
-        //     }
-
-        //     media.likes = likes;
-        //     media.isLiked = isLiked;
-        //     h3.textContent = likes;
-        //     updateLikedClass(h3, isLiked); // Mettre à jour la classe 'liked'
-        //     updateLikesCounter(totalLikes);
-        // });
 
         likeIcon.addEventListener('click', () => {
             toggleLike();
@@ -159,6 +143,7 @@ function mediaFactory(mediasFiltered) {
                 displaylightBox(media);
             }
         });
+
         return video;
     }
 
@@ -277,7 +262,6 @@ function mediaFactory(mediasFiltered) {
             lightBox.style.display = "none";
         });
 
-        //next.focus();
     }
 
     const ctaContainer = getCtaDom(totalLikes);

@@ -1,6 +1,8 @@
 // eslint-disable-next-line 
-function photographerFactory(photographer) {
-    const { id, name, city, tagline, country, portrait, price } = photographer;
+function photographerFactory(photographerObject) {
+    const { id, name, city, tagline, country, portrait, price } = photographerObject;
+
+    console.log('photographerObject', photographerObject)
 
     function getUserCardDOM() {
 
@@ -15,7 +17,7 @@ function photographerFactory(photographer) {
 
         const img = document.createElement('img');
         img.setAttribute("src", picture);
-        img.setAttribute("alt", "");
+        img.setAttribute("alt", `${name}`);
 
         const h2 = document.createElement('h2');
         h2.textContent = name;
@@ -41,7 +43,7 @@ function photographerFactory(photographer) {
 
     function getIdUserCardDOM() {
 
-        if (!photographer) {
+        if (!photographerObject) {
             console.error('Photographer not found');
             return null;
         }
