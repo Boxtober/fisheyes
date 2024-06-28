@@ -209,8 +209,6 @@ function mediaFactory(mediasFiltered) {
         }
 
         const lightBox = document.querySelector('#lightBox-modal');
-        // lightBox.setAttribute('aria-label', 'galerie de media');
-
         const mediaContainer = document.createElement('div');
 
         lightBox.innerHTML = '';
